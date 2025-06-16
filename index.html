@@ -18,11 +18,11 @@
     /* Corazones */
 .heart {
   position: absolute;
-  color: pink;
+  color: #ff69b4;
   font-size: 0.8rem;
   animation: fall linear infinite;
   opacity: 0.7;
-  z-index: -2;
+  z-index: 0;
   user-select: none;
   pointer-events: none;
   transform: translateY(0); /* 👈 Asegura inicio de la animación */
@@ -122,6 +122,27 @@
         max-width: 100%;
       }
     }
+    #kissBtn {
+  background-color: #ff80ab; /* rosa claro */
+  border: 2px solid #ff4081; /* rosa un poco más intenso */
+  border-radius: 12px;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 0.6rem 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-shadow: 1px 1px 3px rgba(255, 20, 100, 0.7);
+  letter-spacing: 1.5px;
+}
+
+#kissBtn:hover {
+  background-color: #ff4081;
+  color: #ffe4f1;
+  text-shadow: 2px 2px 5px rgba(255, 105, 180, 0.9);
+}
+
   </style>
 </head>
 <body>
@@ -160,17 +181,19 @@
   <!-- Botón ¿kiss? -->
 <div style="text-align: center; margin: 2rem 0;">
   <button id="kissBtn" style="
-    background-color: #ff80ab; /* rosa claro */
-    border: 2px solid #ff4081; /* rosa un poco más intenso */
-    border-radius: 12px;
-    color: white;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: 0.6rem 2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  ">
+  kissBtn.addEventListener('click', () => {
+  kissGifContainer.style.pointerEvents = 'auto';
+  kissGifContainer.style.opacity = '1';
+
+  setTimeout(() => {
+    kissGifContainer.style.opacity = '0'; // empieza el fade-out (0.5s por CSS)
+  }, 3000); // tiempo visible completo sin fade
+
+  setTimeout(() => {
+    kissGifContainer.style.pointerEvents = 'none'; // después de fade-out
+  }, 3500);
+});
+">
     ¿kiss?
   </button>
 </div>
