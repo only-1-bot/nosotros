@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <title>Solo tú</title>
   <style>
-body {
-  margin: 0;
-  background: black;
-  overflow: auto;
-  cursor: pointer;
-  min-height: 100vh;
-  padding: 0 1.5rem 3rem 1.5rem; /* agrega 3rem de espacio al final */
-}
+    body {
+      margin: 0;
+      background: black;
+      overflow: auto;
+      cursor: pointer;
+      min-height: 100vh;
+      padding: 0 1.5rem 3rem 1.5rem; /* agrega 3rem de espacio al final */
+    }
 
     canvas {
       display: block;
@@ -63,10 +63,10 @@ body {
     }
 
     img.foto[src$="foto6.jpg"] {
-  border: none;
-  box-shadow: none;
-  background-color: transparent;
-}
+      border: none;
+      box-shadow: none;
+      background-color: transparent;
+    }
 
     h2 {
       color: #ff69b4;
@@ -80,14 +80,12 @@ body {
       padding: 2rem;
       border-radius: 12px;
       max-width: 850px;
-      margin: 6rem auto 3rem auto; /* Más espacio arriba */
+      margin: 6rem auto 3rem auto;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
       line-height: 1.6;
       text-align: justify;
     }
-    
 
-    /* Nueva celda tipo tabla */
     .celda-adicional {
       background-color: white;
       max-width: 350px;
@@ -115,34 +113,32 @@ body {
   <div class="texto-lorem">
     <h2>Nosotros</h2>
     <p>
-    Ya pasaron 6 meses desde que conocimos, y aún sigue vivido en mi memoria esa tarde en la que empezamos a hablar por un meme sin gracia de BTC.<br>
-    Tantas noches hablando, jugando o simplemente haciendonos compañia. Antes de que siquiera haya pasado algo, ya sentia que te conocia desde hace tiempo y la pasaba (paso) muy bien siempre que estoy contigo.<br>
-    No me di ni cuenta y ya pude tener la fortuna de poder llamarte mi pareja, poder ser esa persona con la que pasas tiempo y quieres.<br>
-    Seis meses no es una cantidad corta de tiempo, y hasta ahora sigo teniendo el mismo sentimiento de esa vez que me di cuenta que ambos nos queriamos de la misma forma -acepto que yo tarde en darme cuenta-, de igual manera, cada dia es más bonito teniendote a mi lado.<br>
-    Espero poder seguir siendo por un largo tiempo esa persona que llamas "tu amor", tu pareja, esa persona que esta a tu lado y apoya en todo, porqué por más que sé que seguro tendremos problemas, quiero que los resolvamos juntos, por que sé tú eres la persona que quiero a mi lado.<br>
+      Ya pasaron 6 meses desde que conocimos, y aún sigue vivido en mi memoria esa tarde en la que empezamos a hablar por un meme sin gracia de BTC.<br>
+      Tantas noches hablando, jugando o simplemente haciendonos compañia. Antes de que siquiera haya pasado algo, ya sentia que te conocia desde hace tiempo y la pasaba (paso) muy bien siempre que estoy contigo.<br>
+      No me di ni cuenta y ya pude tener la fortuna de poder llamarte mi pareja, poder ser esa persona con la que pasas tiempo y quieres.<br>
+      Seis meses no es una cantidad corta de tiempo, y hasta ahora sigo teniendo el mismo sentimiento de esa vez que me di cuenta que ambos nos queriamos de la misma forma -acepto que yo tarde en darme cuenta-, de igual manera, cada dia es más bonito teniendote a mi lado.<br>
+      Espero poder seguir siendo por un largo tiempo esa persona que llamas "tu amor", tu pareja, esa persona que esta a tu lado y apoya en todo, porqué por más que sé que seguro tendremos problemas, quiero que los resolvamos juntos, por que sé tú eres la persona que quiero a mi lado.<br>
     </p>
     <p style="text-align: center; margin-top: 2rem;">
-    Gracias por dejarme considerarte a tí Mi Persona Especial ♡
-  </p>
+      Gracias por dejarme considerarte a tí Mi Persona Especial ♡
+    </p>
     <p style="text-align: center; margin-top: 2rem; font-size: small;">
-    Atte: mycb
-  </p>
+      Atte: mycb
+    </p>
   </div>
-<br>
-  <!-- Nueva celda luego del texto Lorem -->
-<!-- CELDA COMPLETA -->
-<div class="celda-adicional">
-  <img src="https://l3m0nd505.github.io/nosotros/img/foto6.jpeg" class="foto">
-</div>
-<br><br>
+
+  <!-- CELDA CON FOTO6 -->
+  <div class="celda-adicional">
+    <img src="./img/foto6.jpg" class="foto">
+  </div>
 
   <script>
     const imagenes = [
-      "https://l3m0nd505.github.io/nosotros/img/foto1.jpeg",
-      "https://l3m0nd505.github.io/nosotros/img/foto2.jpeg",
-      "https://l3m0nd505.github.io/nosotros/img/foto3.jpeg",
-      "https://l3m0nd505.github.io/nosotros/img/foto4.jpeg",
-      "https://l3m0nd505.github.io/nosotros/img/foto5.jpeg"
+      "./img/foto1.jpg",
+      "./img/foto2.jpg",
+      "./img/foto3.jpg",
+      "./img/foto4.jpg",
+      "./img/foto5.jpg"
     ];
 
     const galeria = document.getElementById("galeria");
@@ -161,8 +157,6 @@ body {
     const text = "TE AMO";
     const fontSize = 16;
     const columns = Math.floor(canvas.width / (fontSize * 4));
-
-    // Inicializamos las gotas con valores aleatorios para la posición vertical (para dispersar)
     const drops = [];
     for(let i = 0; i < columns; i++) {
       drops[i] = Math.random() * canvas.height / fontSize;
