@@ -8,32 +8,22 @@
     body {
       margin: 0;
       background: linear-gradient(160deg, #0d0d0d, #1a1a1a);
-      overflow: auto;
-      cursor: pointer;
       font-family: 'Quicksand', sans-serif;
       min-height: 100vh;
       padding: 0 1.2rem 3rem 1.2rem;
+      overflow-x: hidden;
       position: relative;
     }
 
-    canvas {
-      display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -2;
-    }
-
+    /* Fondo corazones */
     .heart {
       position: fixed;
-      color: pink;
-      font-size: 1.5rem;
-      animation: fall linear infinite;
-      opacity: 0.8;
-      z-index: -3; /* detrás del canvas */
-      user-select: none;
+      z-index: 0;
       pointer-events: none;
-      animation-fill-mode: forwards;
+      user-select: none;
+      animation: fall linear infinite;
+      opacity: 0.7;
+      color: pink;
     }
 
     @keyframes fall {
@@ -47,29 +37,21 @@
       }
     }
 
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
     h1 {
-      position: relative;
-      display: inline-block;
-      color: hotpink;
-      font-size: 8vw;
-      margin: 2rem auto;
-      white-space: nowrap;
-      overflow: hidden;
       text-align: center;
-      transform: translateX(-50%);
-      left: 50%;
-      border-right: 2px solid hotpink;
-      width: 0ch;
-      animation: typing 3s steps(25) forwards, blink 0.8s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0ch; }
-      to { width: 25ch; } /* Ajustado al texto completo */
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent; }
+      font-size: 3rem;
+      margin-top: 2rem;
+      color: hotpink;
+      z-index: 2;
+      position: relative;
     }
 
     h1::before,
@@ -85,23 +67,23 @@
     h1::after { right: -2rem; }
 
     .resaltado {
-      font-weight: bold;
       color: deeppink;
     }
 
     #galeria {
       width: 100%;
       max-width: 500px;
-      margin: 0 auto 3rem auto;
+      margin: 2rem auto;
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      z-index: 2;
+      position: relative;
     }
 
     img.foto {
       width: 100%;
-      max-width: 400px;
-      height: auto;
+      max-width: 100%;
       border: 3px solid #ff69b4;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
@@ -117,12 +99,6 @@
       transform: rotate(1deg) scale(1.02);
     }
 
-    img.foto:nth-child(1) { animation-delay: 0.2s; }
-    img.foto:nth-child(2) { animation-delay: 0.4s; }
-    img.foto:nth-child(3) { animation-delay: 0.6s; }
-    img.foto:nth-child(4) { animation-delay: 0.8s; }
-    img.foto:nth-child(5) { animation-delay: 1s; }
-
     @keyframes fadeIn {
       to {
         opacity: 1;
@@ -136,101 +112,39 @@
       margin: 5rem auto 2rem auto;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       text-align: justify;
-      width: 100%;
       max-width: 800px;
       padding: 1.5rem 1.2rem;
       font-size: 1.2rem;
       line-height: 1.8;
-    }
-
-    .celda-adicional {
-      width: 90vw;
-      max-width: 800px;
-      border: 3px solid #ff69b4;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
-      display: block;
-      margin: 0 auto;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 1s ease forwards;
-      padding: 1rem;
-      font-size: 1rem;
+      z-index: 2;
+      position: relative;
     }
 
     h2 {
-      animation: fadeInUp 1.2s ease forwards;
-      opacity: 0;
-      transform: translateY(20px);
-      color: #ff69b4;
       text-align: center;
+      color: #ff69b4;
       margin-bottom: 1rem;
       text-shadow: 0 0 6px #ff69b4cc;
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     @media (max-width: 600px) {
       h1 {
         font-size: 2rem;
-        width: auto;
-        animation: none;
-        border-right: none;
-        white-space: normal;
-        text-align: center;
-        transform: none;
-        left: 0;
-        display: block;
-        margin: 2rem auto;
       }
-
       .texto-lorem {
-        font-size: 1rem;
-        padding: 1rem;
-        line-height: 1.6;
+        font-size: 1.1rem;
+        padding: 1.2rem;
       }
-
-      .celda-adicional {
-        font-size: 0.95rem;
-        padding: 0.8rem;
-      }
-
       img.foto {
         border-width: 2px;
         border-radius: 10px;
-        max-width: 100%;
-      }
-
-      #galeria {
-        max-width: 100%;
-        width: 100%;
-        padding: 0 0.5rem;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      h1 {
-        font-size: 4rem;
-      }
-
-      .texto-lorem {
-        font-size: 1.4rem;
-      }
-
-      img.foto {
-        max-width: 700px;
       }
     }
   </style>
 </head>
 <body>
 
-  <h1><span class="resaltado">Mí</span> Persona Especial.</h1>
+  <h1><span class="resaltado">Mi</span> Persona Especial.</h1>
 
   <div id="galeria"></div>
 
@@ -268,74 +182,38 @@
       const img = document.createElement("img");
       img.src = url;
       img.className = "foto";
-      img.alt = "Foto";
       galeria.appendChild(img);
     });
+  </script>
 
+  <script>
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
     const text = "TE AMO";
-    const fontSize = 16;
-    let columns = Math.floor(canvas.width / (fontSize * 4));
-    let drops = Array(columns).fill(1);
-
-    ctx.font = fontSize + "px monospace";
+    const fontSize = 20;
+    const columns = Math.floor(canvas.width / (fontSize * 4));
+    const drops = Array(columns).fill(1);
 
     function drawMatrix() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#6A2045";
+      ctx.fillStyle = "#FF69B4";
+      ctx.font = fontSize + "px monospace";
 
       for (let i = 0; i < drops.length; i++) {
         const x = i * fontSize * 4;
         const y = drops[i] * fontSize;
         ctx.fillText(text, x, y);
-
-        if (y > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-
-        drops[i] += 0.1;
+        if (y > canvas.height || Math.random() > 0.95) drops[i] = 0;
+        drops[i] += 1;
       }
-    }
-
-    let particles = [];
-
-    canvas.addEventListener('click', (e) => {
-      for (let i = 0; i < 20; i++) {
-        particles.push({
-          x: e.clientX,
-          y: e.clientY,
-          vx: (Math.random() - 0.5) * 4,
-          vy: (Math.random() - 0.5) * 4,
-          alpha: 1,
-          size: fontSize + Math.random() * 8
-        });
-      }
-    });
-
-    function drawParticles() {
-      particles.forEach((p, index) => {
-        ctx.globalAlpha = p.alpha;
-        ctx.font = p.size + "px monospace";
-        ctx.fillStyle = "#ff007f";
-        ctx.fillText("TE AMO", p.x, p.y);
-        p.x += p.vx;
-        p.y += p.vy;
-        p.alpha -= 0.01;
-        if (p.alpha <= 0) {
-          particles.splice(index, 1);
-        }
-      });
-      ctx.globalAlpha = 1;
     }
 
     function animate() {
       drawMatrix();
-      drawParticles();
       requestAnimationFrame(animate);
     }
 
@@ -344,11 +222,10 @@
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      columns = Math.floor(canvas.width / (fontSize * 4));
-      drops = Array(columns).fill(1);
     });
+  </script>
 
-    // Crear corazones animados
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
       for (let i = 0; i < 80; i++) {
         const heart = document.createElement('span');
@@ -365,3 +242,4 @@
 
 </body>
 </html>
+
