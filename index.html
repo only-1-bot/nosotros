@@ -123,19 +123,33 @@
       }
     }
     #kissBtn {
-  background-color: #ff80ab; /* rosa claro */
-  border: 2px solid #ff4081; /* rosa un poco más intenso */
-  border-radius: 12px;
+  background: linear-gradient(135deg, #ff9ebf, #ff69b4);
+  border: none;
+  border-radius: 14px;
   color: white;
   font-family: 'Quicksand', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.2rem;
-  padding: 0.6rem 2rem;
+  padding: 0.8rem 2.2rem;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  text-shadow: 1px 1px 3px rgba(255, 20, 100, 0.7);
-  letter-spacing: 1.5px;
+  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ff9ebf, #ff69b4, #ff80ab);
+  background-size: 200% 200%;
+  animation: glowShift 5s ease infinite;
 }
+
+@keyframes glowShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
 
 #kissBtn:hover {
   background-color: #ff4081;
@@ -199,6 +213,30 @@ kissBtn.addEventListener('click', () => {
   </button>
 </div>
 
+  <script>
+  const kissBtn = document.getElementById('kissBtn');
+  const kissGifContainer = document.getElementById('kissGifContainer');
+
+  kissBtn.addEventListener('click', () => {
+    // Animación tipo "pop"
+    kissBtn.style.transform = 'scale(0.96)';
+    setTimeout(() => kissBtn.style.transform = 'scale(1)', 150);
+
+    // Mostrar el gif con duración exacta
+    kissGifContainer.style.pointerEvents = 'auto';
+    kissGifContainer.style.opacity = '1';
+
+    setTimeout(() => {
+      kissGifContainer.style.opacity = '0';
+    }, 1700);
+
+    setTimeout(() => {
+      kissGifContainer.style.pointerEvents = 'none';
+    }, 2200);
+  });
+</script>
+
+
 <!-- GIF oculto -->
 <div id="kissGifContainer" style="
   position: fixed;
@@ -214,18 +252,20 @@ kissBtn.addEventListener('click', () => {
 </div>
 
 <script>
-  const kissBtn = document.getElementById('kissBtn');
-  const kissGifContainer = document.getElementById('kissGifContainer');
+kissBtn.addEventListener('click', () => {
+  kissGifContainer.style.pointerEvents = 'auto';
+  kissGifContainer.style.opacity = '1';
 
-  kissBtn.addEventListener('click', () => {
-    kissGifContainer.style.pointerEvents = 'auto';
-    kissGifContainer.style.opacity = '1';
+  // GIF visible por casi 1.7s, luego fade-out de 0.5s
+  setTimeout(() => {
+    kissGifContainer.style.opacity = '0';
+  }, 1700);
 
-    setTimeout(() => {
-      kissGifContainer.style.opacity = '0';
-      kissGifContainer.style.pointerEvents = 'none';
-    }, 3500);
-  });
+  setTimeout(() => {
+    kissGifContainer.style.pointerEvents = 'none';
+  }, 2200);
+});
+
 </script>
 
   <!-- Corazones -->
