@@ -44,8 +44,9 @@
 
     .img-container {
       position: relative;
-      width: 100%;
-      max-width: 400px;
+      width: 90%;
+      max-width: 320px;
+      margin: 0 auto;
     }
 
     .foto {
@@ -237,7 +238,7 @@
 <div id="foto6-container">
   <div class="img-container">
     <img src="img/foto6.jpeg" class="foto" />
-    <div class="tapadera" style="background-color: rgba(255, 105, 180, 0.6);"></div>
+    <div class="tapadera"></div>
   </div>
 </div>
 
@@ -250,14 +251,12 @@
 </div>
 
 <script>
-  // Tapaderas
   document.querySelectorAll('.img-container').forEach(container => {
     container.addEventListener('click', () => {
       container.classList.add('clicked');
     });
   });
 
-  // Botón kiss
   const kissBtn = document.getElementById('kissBtn');
   const kissGifContainer = document.getElementById('kissGifContainer');
 
@@ -272,7 +271,6 @@
     }, 3000);
   });
 
-  // Corazones flotantes
   document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < 80; i++) {
       const heart = document.createElement('span');
@@ -286,7 +284,6 @@
     }
   });
 
-  // Canvas TE AMO
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
@@ -333,4 +330,5 @@
 
 </body>
 </html>
+
 
