@@ -157,6 +157,53 @@
 
   <img src="img/foto6.jpeg" class="foto" style="display: block; margin: 0 auto; margin-top: 2rem;" />
 
+  <!-- Botón ¿kiss? -->
+<div style="text-align: center; margin: 2rem 0;">
+  <button id="kissBtn" style="
+    background-color: #ff80ab; /* rosa claro */
+    border: 2px solid #ff4081; /* rosa un poco más intenso */
+    border-radius: 12px;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.6rem 2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  ">
+    ¿kiss?
+  </button>
+</div>
+
+<!-- GIF oculto -->
+<div id="kissGifContainer" style="
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 1000;
+">
+  <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExendlbzZ3ZjFsd290c2RoaHYzdWxmdjV2cHhudTZ1Y3BvN2x0cW1wMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oz8xsaLjLVqVXr3tS/giphy.gif" alt="kiss gif" style="max-width: 300px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.7);" />
+</div>
+
+<script>
+  const kissBtn = document.getElementById('kissBtn');
+  const kissGifContainer = document.getElementById('kissGifContainer');
+
+  kissBtn.addEventListener('click', () => {
+    kissGifContainer.style.pointerEvents = 'auto';
+    kissGifContainer.style.opacity = '1';
+
+    setTimeout(() => {
+      kissGifContainer.style.opacity = '0';
+      kissGifContainer.style.pointerEvents = 'none';
+    }, 3500);
+  });
+</script>
+
   <!-- Corazones -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
