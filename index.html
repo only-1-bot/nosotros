@@ -1,298 +1,238 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Para el más lindo</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-        
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background: #000;
-            touch-action: manipulation;
-        }
-        #galaxyCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
-        #loveRain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-        .title-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            text-align: center;
-            perspective: 500px;
-            width: 90%;
-        }
-        .title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.8em;
-            color: #ff55ff;
-            text-shadow: 
-                2px 2px 0 #ff00ff,
-                3px 3px 0 #aa00aa,
-                4px 4px 0 #550055;
-            transform: rotateX(10deg) rotateY(-5deg);
-            animation: heartbeat 1.5s infinite, float 3s ease-in-out infinite;
-            display: inline-block;
-            padding: 15px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 3px solid #ff55ff;
-            box-shadow: 
-                0 0 10px #ff00ff,
-                inset 0 0 10px #ff00ff;
-            word-wrap: break-word;
-        }
-        @keyframes heartbeat {
-            0% { transform: rotateX(10deg) rotateY(-5deg) scale(1); }
-            50% { transform: rotateX(10deg) rotateY(-5deg) scale(1.05); }
-            100% { transform: rotateX(10deg) rotateY(-5deg) scale(1); }
-        }
-        @keyframes float {
-            0%, 100% { transform: rotateX(10deg) rotateY(-5deg) translateY(0); }
-            50% { transform: rotateX(10deg) rotateY(-5deg) translateY(-5px); }
-        }
-        .pixel-corner {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #ff55ff;
-            z-index: 3;
-        }
-        .pixel-corner:nth-child(1) {
-            top: 0;
-            left: 0;
-        }
-        .pixel-corner:nth-child(2) {
-            top: 0;
-            right: 0;
-        }
-        .pixel-corner:nth-child(3) {
-            bottom: 0;
-            left: 0;
-        }
-        .pixel-corner:nth-child(4) {
-            bottom: 0;
-            right: 0;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Solo tú</title>
+  <style>
+body {
+  margin: 0;
+  background: black;
+  overflow: auto;
+  cursor: pointer;
+  min-height: 100vh;
+  padding: 0 1.5rem 3rem 1.5rem; /* agrega 3rem de espacio al final */
+}
+
+    canvas {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    h1 {
+      color: hotpink;
+      font-size: 3.5rem;
+      text-align: center;
+      position: relative;
+      padding: 0 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h1::before,
+    h1::after {
+      content: "♡";
+      font-size: 2.5rem;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    h1::before {
+      left: 0;
+    }
+    h1::after {
+      right: 0;
+    }
+
+    #galeria {
+      max-width: 320px;
+      margin: 0 auto 4.5rem auto; /* espacio abajo */
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    img.foto {
+      width: 280px;
+      border: 4px solid #ff69b4;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+      display: block;
+      margin: 0 auto;
+    }
+
+    img.foto[src$="foto6.jpg"] {
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+    h2 {
+      color: #ff69b4;
+      text-align: center;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 6px #ff69b4cc;
+    }
+
+    .texto-lorem {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 850px;
+      margin: 6rem auto 3rem auto; /* Más espacio arriba */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      line-height: 1.6;
+      text-align: justify;
+    }
+    
+
+    /* Nueva celda tipo tabla */
+    .celda-adicional {
+      background-color: white;
+      max-width: 350px;
+      margin: 3rem auto 4rem auto;
+      padding: 2rem;
+      border-radius: 15px;
+      border: 4px solid #ff69b4;
+      box-shadow: 0 6px 15px rgba(255, 105, 180, 0.4);
+      color: #333;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      text-align: center;
+      font-family: monospace;
+    }
+  </style>
 </head>
 <body>
-    <canvas id="galaxyCanvas"></canvas>
-    <div class="title-container">
-        <div class="pixel-corner"></div>
-        <div class="pixel-corner"></div>
-        <div class="pixel-corner"></div>
-        <div class="pixel-corner"></div>
-        <h1 class="title">PRECIOSITO ♡</h1>
-    </div>
-    <canvas id="loveRain"></canvas>
 
-    <script>
-        // Configuración del canvas de galaxia
-        const galaxyCanvas = document.getElementById('galaxyCanvas');
-        const galaxyCtx = galaxyCanvas.getContext('2d');
-        
-        // Configuración del canvas de partículas
-        const loveCanvas = document.getElementById('loveRain');
-        const loveCtx = loveCanvas.getContext('2d');
+  <h1><b>Mí</b>  Persona  Especial.</h1>
 
-        function resizeCanvases() {
-            galaxyCanvas.width = loveCanvas.width = window.innerWidth;
-            galaxyCanvas.height = loveCanvas.height = window.innerHeight;
-        }
-        resizeCanvases();
+  <div class="tabla-fotos" id="galeria"></div>
 
-        // Galaxia y estrellas (sin nebulosa central)
-        class Star {
-            constructor() {
-                this.x = Math.random() * galaxyCanvas.width;
-                this.y = Math.random() * galaxyCanvas.height;
-                this.size = Math.random() * 1.2;
-                this.brightness = 0.1 + Math.random() * 0.9;
-                this.speed = 0.1 + Math.random() * 0.3;
-                this.opacity = 0;
-                this.targetOpacity = this.brightness;
-                this.twinkleSpeed = 0.01 + Math.random() * 0.05;
-            }
-            
-            update() {
-                this.y += this.speed;
-                if (this.y > galaxyCanvas.height) {
-                    this.y = 0;
-                    this.x = Math.random() * galaxyCanvas.width;
-                }
-                
-                // Efecto de parpadeo más sutil
-                if (Math.random() < 0.005) {
-                    this.targetOpacity = Math.random() * this.brightness;
-                }
-                
-                if (this.opacity < this.targetOpacity) {
-                    this.opacity += this.twinkleSpeed;
-                } else if (this.opacity > this.targetOpacity) {
-                    this.opacity -= this.twinkleSpeed;
-                }
-            }
-            
-            draw() {
-                galaxyCtx.beginPath();
-                galaxyCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                galaxyCtx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                galaxyCtx.fill();
-            }
-        }
+  <canvas id="canvas"></canvas>
 
-        // Crear galaxia uniforme
-        const stars = [];
-        for (let i = 0; i < 400; i++) { // Menos estrellas para móvil
-            stars.push(new Star());
-        }
+  <div class="texto-lorem">
+    <h2>Nosotros</h2>
+    <p>
+    Ya pasaron 6 meses desde que conocimos, y aún sigue vivido en mi memoria esa tarde en la que empezamos a hablar por un meme sin gracia de BTC.<br>
+    Tantas noches hablando, jugando o simplemente haciendonos compañia. Antes de que siquiera haya pasado algo, ya sentia que te conocia desde hace tiempo y la pasaba (paso) muy bien siempre que estoy contigo.<br>
+    No me di ni cuenta y ya pude tener la fortuna de poder llamarte mi pareja, poder ser esa persona con la que pasas tiempo y quieres.<br>
+    Seis meses no es una cantidad corta de tiempo, y hasta ahora sigo teniendo el mismo sentimiento de esa vez que me di cuenta que ambos nos queriamos de la misma forma -acepto que yo tarde en darme cuenta-, de igual manera, cada dia es más bonito teniendote a mi lado.<br>
+    Espero poder seguir siendo por un largo tiempo esa persona que llamas "tu amor", tu pareja, esa persona que esta a tu lado y apoya en todo, porqué por más que sé que seguro tendremos problemas, quiero que los resolvamos juntos, por que sé tú eres la persona que quiero a mi lado.<br>
+    </p>
+    <p style="text-align: center; margin-top: 2rem;">
+    Gracias por dejarme considerarte a tí Mi Persona Especial ♡
+  </p>
+    <p style="text-align: center; margin-top: 2rem; font-size: small;">
+    Atte: mycb
+  </p>
+  </div>
+<br>
+  <!-- Nueva celda luego del texto Lorem -->
+<!-- CELDA COMPLETA -->
+<div class="celda-adicional">
+  <img src="https://l3m0nd505.github.io/nosotros/img/foto6.jpeg" class="foto">
+</div>
+<br><br>
 
-        // Animación de galaxia sin nebulosa
-        function animateGalaxy() {
-            galaxyCtx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-            galaxyCtx.fillRect(0, 0, galaxyCanvas.width, galaxyCanvas.height);
-            
-            // Algunas estrellas grandes para puntos destacados
-            if (Math.random() < 0.02) {
-                galaxyCtx.beginPath();
-                galaxyCtx.arc(
-                    Math.random() * galaxyCanvas.width,
-                    Math.random() * galaxyCanvas.height,
-                    1 + Math.random() * 0.8,
-                    0, Math.PI * 2
-                );
-                galaxyCtx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-                galaxyCtx.fill();
-            }
-            
-            stars.forEach(star => {
-                star.update();
-                star.draw();
-            });
-            
-            requestAnimationFrame(animateGalaxy);
-        }
-        animateGalaxy();
+  <script>
+    const imagenes = [
+      "https://l3m0nd505.github.io/nosotros/img/foto1.jpeg",
+      "https://l3m0nd505.github.io/nosotros/img/foto2.jpeg",
+      "https://l3m0nd505.github.io/nosotros/img/foto3.jpeg",
+      "https://l3m0nd505.github.io/nosotros/img/foto4.jpeg",
+      "https://l3m0nd505.github.io/nosotros/img/foto5.jpeg"
+    ];
 
-        // Partículas de amor adaptadas para móvil
-        const compliments = [
-            "Tus ojos brillan", "Sonrisa perfecta", "Hermosito", 
-            "Belleza única", "Lindo", "Labios de miel",
-            "Mirada cautivante", "Eres un sueño", "Figura divina",
-            "Eres luz", "Cabello hermoso", "Elegante y hermoso",
-            "Precioso", "Eres magia", "Belleza sin igual",
-            "De otro mundo", "Eres arte", "Dios terrenal",
-            "Hermoso por siempre", "Lo más bello", "Perfecto en todo",
-            "Eres el mejor", "Belleza pura", "Me vuelves loca",
-            "Eres increíble", "Me fascinas", "Todo en ti es perfecto",
-            "Mi Cielo", "Mi corazón", "Mi Caramelito De Café"
-        ];
+    const galeria = document.getElementById("galeria");
+    imagenes.forEach(url => {
+      const img = document.createElement("img");
+      img.src = url;
+      img.className = "foto";
+      galeria.appendChild(img);
+    });
 
-        const symbols = ["❤️", "💖", "💘", "💝", "🌹", "💗", "💞", "💕"];
-        const colors = [
-            "#ff55ff", "#ff77ff", "#ff99ff", "#ffbbff",
-            "#ff00ff", "#cc00cc", "#aa00aa", "#ff66aa",
-            "#ff0088", "#ff3377", "#ff5599", "#ff0099"
-        ];
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-        const particles = [];
-        const particleCount = 40; // Menos partículas para móvil
+    const text = "TE AMO";
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / (fontSize * 4));
 
-        for (let i = 0; i < particleCount; i++) {
-            const isText = Math.random() > 0.4; // Más emojis para mejor rendimiento
-            particles.push({
-                x: Math.random() * loveCanvas.width,
-                y: Math.random() * -loveCanvas.height,
-                speed: 0.5 + Math.random() * 1.5, // Más lento
-                size: isText ? 8 + Math.random() * 6 : 15 + Math.random() * 15, // Más pequeño
-                content: isText ? 
-                    compliments[Math.floor(Math.random() * compliments.length)] : 
-                    symbols[Math.floor(Math.random() * symbols.length)],
-                color: colors[Math.floor(Math.random() * colors.length)],
-                rotation: 0,
-                opacity: 0.9,
-                sway: Math.random() * 1 - 0.5, // Menos movimiento lateral
-                swaySpeed: 0.01 + Math.random() * 0.02,
-                isText: isText
-            });
+    // Inicializamos las gotas con valores aleatorios para la posición vertical (para dispersar)
+    const drops = [];
+    for(let i = 0; i < columns; i++) {
+      drops[i] = Math.random() * canvas.height / fontSize;
+    }
+
+    ctx.font = fontSize + "px monospace";
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#6A2045";
+      for (let i = 0; i < drops.length; i++) {
+        const x = i * fontSize * 4;
+        const y = drops[i] * fontSize;
+        ctx.fillText(text, x, y);
+
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
         }
 
-        function animateLove() {
-            loveCtx.clearRect(0, 0, loveCanvas.width, loveCanvas.height);
-            
-            particles.forEach(particle => {
-                loveCtx.save();
-                loveCtx.translate(particle.x, particle.y);
-                loveCtx.globalAlpha = particle.opacity;
-                
-                if (!particle.isText) {
-                    loveCtx.font = `${particle.size}px serif`;
-                    loveCtx.fillStyle = particle.color;
-                    loveCtx.textAlign = 'center';
-                    loveCtx.textBaseline = 'middle';
-                    loveCtx.fillText(particle.content, 0, 0);
-                } else {
-                    loveCtx.font = `bold ${particle.size}px 'Arial', sans-serif`;
-                    loveCtx.fillStyle = particle.color;
-                    loveCtx.textAlign = 'center';
-                    loveCtx.textBaseline = 'middle';
-                    
-                    const words = particle.content.split(' ');
-                    if (words.length > 2 && particle.content.length > 12) {
-                        const middle = Math.floor(words.length / 2);
-                        const line1 = words.slice(0, middle).join(' ');
-                        const line2 = words.slice(middle).join(' ');
-                        loveCtx.fillText(line1, 0, -particle.size/2);
-                        loveCtx.fillText(line2, 0, particle.size/2);
-                    } else {
-                        loveCtx.fillText(particle.content, 0, 0);
-                    }
-                }
-                
-                loveCtx.restore();
+        drops[i] += 0.1;
+      }
+    }
 
-                particle.y += particle.speed;
-                particle.x += particle.sway * Math.sin(particle.y * particle.swaySpeed);
+    let particles = [];
 
-                if (particle.y > loveCanvas.height + 50) {
-                    particle.y = -20;
-                    particle.x = Math.random() * loveCanvas.width;
-                    const isText = Math.random() > 0.4;
-                    particle.content = isText ? 
-                        compliments[Math.floor(Math.random() * compliments.length)] : 
-                        symbols[Math.floor(Math.random() * symbols.length)];
-                    particle.color = colors[Math.floor(Math.random() * colors.length)];
-                    particle.size = isText ? 8 + Math.random() * 6 : 15 + Math.random() * 15;
-                    particle.isText = isText;
-                }
-            });
-
-            requestAnimationFrame(animateLove);
-        }
-        animateLove();
-
-        window.addEventListener('resize', () => {
-            resizeCanvases();
+    canvas.addEventListener('click', (e) => {
+      for (let i = 0; i < 20; i++) {
+        particles.push({
+          x: e.clientX,
+          y: e.clientY,
+          vx: (Math.random() - 0.5) * 4,
+          vy: (Math.random() - 0.5) * 4,
+          alpha: 1,
+          size: fontSize + Math.random() * 8
         });
+      }
+    });
 
-        // Evitar zoom con gestos táctiles
-        document.addEventListener('gesturestart', function(e) {
-            e.preventDefault();
-        });
-    </script>
+    function drawParticles() {
+      particles.forEach((p, index) => {
+        ctx.globalAlpha = p.alpha;
+        ctx.font = p.size + "px monospace";
+        ctx.fillStyle = "#ff007f";
+        ctx.fillText("TE AMO", p.x, p.y);
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= 0.01;
+        if (p.alpha <= 0) {
+          particles.splice(index, 1);
+        }
+      });
+      ctx.globalAlpha = 1;
+    }
+
+    function animate() {
+      drawMatrix();
+      drawParticles();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+
 </body>
 </html>
+
