@@ -39,14 +39,6 @@
       }
     }
 
-    canvas {
-      display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-
     h1 {
       color: hotpink;
       font-size: 3.5rem;
@@ -82,7 +74,7 @@
       border-radius: 10px;
       overflow: hidden;
 
-      /* Aquí conservamos el borde original que tenías */
+      /* Conserva el borde */
       box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
       border: 2px solid deeppink;
       background: #2a0a2a;
@@ -95,7 +87,7 @@
       user-select: none;
       opacity: 1; /* visible desde el inicio, la máscara tapa */
       transition: opacity 0.6s ease;
-      pointer-events: none; /* para que el clic pase a la máscara */
+      pointer-events: none;
     }
 
     .mascara {
@@ -106,6 +98,11 @@
       cursor: pointer;
       border-radius: 10px;
       z-index: 2;
+    }
+
+    /* Máscara con más opacidad para foto6 */
+    .imagen-revelar.mascara-opaca .mascara {
+      background-color: rgba(255, 105, 180, 0.95);
     }
 
     .imagen-revelar.ocultar .mascara {
@@ -165,7 +162,6 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, #ff9ebf, #ff69b4, #ff80ab);
       background-size: 200% 200%;
       animation: glowShift 5s ease infinite;
     }
@@ -211,15 +207,7 @@
       <img src="img/foto5.jpeg" class="foto" alt="Foto 5" />
       <div class="mascara"></div>
     </div>
-
-    <!-- Última imagen con efecto tapadera también -->
-    <div class="imagen-revelar">
-      <img src="img/foto6.jpeg" class="foto" alt="Foto 6" />
-      <div class="mascara"></div>
-    </div>
   </div>
-
-  <canvas id="canvas"></canvas>
 
   <div class="texto-lorem">
     <h2>Nosotros</h2>
@@ -238,14 +226,18 @@
     </p>
   </div>
 
-  <!-- Botón ¿kiss? -->
-  <div style="text-align: center; margin: 2rem 0;">
-    <button id="kissBtn">
-      kiss?
-    </button>
+  <!-- foto6 después del texto, con mayor opacidad en la máscara -->
+  <div class="imagen-revelar mascara-opaca" style="max-width: 400px; margin: 2rem auto;">
+    <img src="img/foto6.jpeg" class="foto" alt="Foto 6" />
+    <div class="mascara"></div>
   </div>
 
-  <!-- GIF oculto -->
+  <canvas id="canvas"></canvas>
+
+  <div style="text-align: center; margin: 2rem 0;">
+    <button id="kissBtn">kiss?</button>
+  </div>
+
   <div id="kissGifContainer" style="
     position: fixed;
     top: 50%;
@@ -364,10 +356,8 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     });
-  </script>
 
-  <!-- Corazones -->
-  <script>
+    // Corazones
     document.addEventListener('DOMContentLoaded', () => {
       for (let i = 0; i < 80; i++) {
         const heart = document.createElement('span');
