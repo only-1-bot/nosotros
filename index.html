@@ -192,50 +192,37 @@
 
   <img src="img/foto6.jpeg" class="foto" style="display: block; margin: 0 auto; margin-top: 2rem;" />
 
-  <!-- Botón ¿kiss? -->
+ <!-- Botón ¿kiss? -->
 <div style="text-align: center; margin: 2rem 0;">
-  <button id="kissBtn" style="
-kissBtn.addEventListener('click', () => {
-  kissGifContainer.style.pointerEvents = 'auto';
-  kissGifContainer.style.opacity = '1';
-
-  setTimeout(() => {
-    kissGifContainer.style.opacity = '0';
-  }, 1800); // mostrar durante 1.8s antes de iniciar fade-out
-
-  setTimeout(() => {
-    kissGifContainer.style.pointerEvents = 'none';
-  }, 2300); // esperar 0.5s para completar el fade-out
-});
-
-">
+  <button id="kissBtn">
     ¿kiss?
   </button>
 </div>
 
-  <script>
+</div>
+
+<script>
   const kissBtn = document.getElementById('kissBtn');
   const kissGifContainer = document.getElementById('kissGifContainer');
 
   kissBtn.addEventListener('click', () => {
-    // Animación tipo "pop"
+    // Animación "pop"
     kissBtn.style.transform = 'scale(0.96)';
     setTimeout(() => kissBtn.style.transform = 'scale(1)', 150);
 
-    // Mostrar el gif con duración exacta
+    // Mostrar el gif
     kissGifContainer.style.pointerEvents = 'auto';
     kissGifContainer.style.opacity = '1';
 
     setTimeout(() => {
       kissGifContainer.style.opacity = '0';
-    }, 1700);
+    }, 1700); // visible 1.7s
 
     setTimeout(() => {
       kissGifContainer.style.pointerEvents = 'none';
-    }, 2200);
+    }, 2200); // esperar 0.5s para desaparecer
   });
 </script>
-
 
 <!-- GIF oculto -->
 <div id="kissGifContainer" style="
