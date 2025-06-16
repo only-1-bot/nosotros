@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <title>Solo tú</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
   <style>
     body {
       margin: 0;
-      background: black;
+      background: linear-gradient(160deg, #0d0d0d, #1a1a1a);
       overflow: auto;
       cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
       min-height: 100vh;
-      padding: 0 1.5rem 3rem 1.5rem;
+      padding: 0 1.2rem 3rem 1.2rem;
     }
 
     canvas {
@@ -21,155 +22,118 @@
       z-index: -1;
     }
 
-h1 {
-  position: relative;
-  display: inline-block;
-  color: hotpink;
-  font-size: 3.5rem;
-  margin: 2rem auto;
-  white-space: nowrap;
-  overflow: hidden;
-  animation: typing-center 3s steps(25) forwards;
-  text-align: center;
-  transform: translateX(-50%);
-  left: 50%;
-  border-right: 2px solid hotpink;
-  animation-delay: 0.5s;
-}
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
+    h1 {
+      position: relative;
+      display: inline-block;
+      color: hotpink;
+      font-size: 2.5rem;
+      margin: 2rem auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-align: center;
+      transform: translateX(-50%);
+      left: 50%;
+      border-right: 2px solid hotpink;
+      animation: typing 3s steps(25) forwards, blink 0.8s step-end infinite;
+    }
 
-@keyframes blink {
-  from, to { border-color: transparent }
-  50% { border-color: hotpink }
-}
-.resaltado {
-  font-weight: bold;
-  color: deeppink;
-}
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: hotpink }
+    }
+
     h1::before,
     h1::after {
       content: "♡";
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
     }
 
-    h1::before {
-      left: 0;
-    }
-
-    h1::after {
-      right: 0;
-    }
+    h1::before { left: -2rem; }
+    h1::after { right: -2rem; }
 
     #galeria {
       max-width: 500px;
-      margin: 0 auto 4.5rem auto;
+      margin: 0 auto 3rem auto;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1rem;
     }
 
     img.foto {
-      width: 100%;
-      border: 4px solid #ff69b4;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+      width: 90vw;
+      max-width: 400px;
+      border: 3px solid #ff69b4;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
       display: block;
       margin: 0 auto;
-      max-width: 500px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s ease forwards;
     }
 
-    img.foto[src$="foto6.jpg"] {
-      width: 90vw; /* Toma el 90% del ancho del celular */
-      max-width: 400px;
-      border: 4px solid #ff69b4;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
-      display: block;
-      margin: 0 auto;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 1s ease forwards;
-}
+    img.foto:nth-child(1) { animation-delay: 0.2s; }
+    img.foto:nth-child(2) { animation-delay: 0.4s; }
+    img.foto:nth-child(3) { animation-delay: 0.6s; }
+    img.foto:nth-child(4) { animation-delay: 0.8s; }
+    img.foto:nth-child(5) { animation-delay: 1s; }
 
-img.foto:nth-child(1) { animation-delay: 0.2s; }
-img.foto:nth-child(2) { animation-delay: 0.4s; }
-img.foto:nth-child(3) { animation-delay: 0.6s; }
-img.foto:nth-child(4) { animation-delay: 0.8s; }
-img.foto:nth-child(5) { animation-delay: 1s; }
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     .texto-lorem {
       background-color: white;
       border-radius: 12px;
-      margin: 6rem auto 3rem auto;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      margin: 5rem auto 2rem auto;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       text-align: justify;
-  max-width: 90vw;
-  padding: 1.5rem;
-  font-size: 0.95rem;
-  line-height: 1.7;
-}
-
+      max-width: 90vw;
+      padding: 1.2rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
     }
 
     .celda-adicional {
       background-color: white;
-      max-width: 500px;
-      margin: 3rem auto 4rem auto;
-      padding: 2rem;
+      max-width: 90vw;
+      margin: 2rem auto;
+      padding: 1.5rem;
       border-radius: 15px;
       border: 4px solid #ff69b4;
-      box-shadow: 0 6px 15px rgba(255, 105, 180, 0.4);
+      box-shadow: 0 6px 15px rgba(255, 105, 180, 0.3);
       color: #333;
-      font-size: 1.2rem;
-      line-height: 1.5;
+      font-size: 1rem;
       text-align: center;
-      font-family: monospace;
     }
 
-    .fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeIn 1s ease forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
     h2 {
-  animation: fadeInUp 1.2s ease forwards;
-  opacity: 0;
-  transform: translateY(20px);
-  color: #ff69b4;
-  text-align: center;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 6px #ff69b4cc;
-}
+      animation: fadeInUp 1.2s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+      color: #ff69b4;
+      text-align: center;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 6px #ff69b4cc;
+    }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
