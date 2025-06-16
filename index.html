@@ -7,44 +7,20 @@
   <style>
     body {
       margin: 0;
-      background: linear-gradient(160deg, #0d0d0d, #1a1a1a);
       font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(-45deg, #0d0d0d, #1a1a1a, #0d0d0d);
+      background-size: 400% 400%;
+      animation: fondoMovimiento 15s ease infinite;
       padding: 0 1rem 3rem;
       overflow-x: hidden;
-      position: relative;
       min-height: 100vh;
+      position: relative;
     }
 
-    /* Corazones */
-    .heart {
-      position: absolute;
-      color: #ff69b4;
-      font-size: 0.8rem;
-      animation: fall linear infinite;
-      opacity: 0.7;
-      z-index: 0;
-      user-select: none;
-      pointer-events: none;
-      transform: translateY(0);
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(-10vh);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(110vh);
-        opacity: 0;
-      }
-    }
-
-    canvas {
-      display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
+    @keyframes fondoMovimiento {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     h1 {
@@ -66,43 +42,42 @@
       font-weight: bold;
     }
 
-    #galeria {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    img.foto {
+    .img-container {
+      position: relative;
       width: 100%;
       max-width: 400px;
+    }
+
+    .foto {
+      width: 100%;
       border: 2px solid #ff69b4;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
       opacity: 0;
       animation: fadeIn 1s ease forwards;
+      display: block;
+    }
+
+    .tapadera {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 105, 180, 0.8);
+      border-radius: 10px;
+      transition: opacity 0.6s ease;
+      z-index: 2;
       cursor: pointer;
-      transition: filter 0.3s ease;
     }
 
-    /* Última imagen con filtro rosa */
-    img.foto6 {
-      filter: sepia(0.3) saturate(3) hue-rotate(-20deg) brightness(1.1);
-      opacity: 1 !important;
-      margin-top: 2rem;
-      max-width: 350px;
-    }
-
-    img.foto6:hover {
-      filter: none;
-      transition: filter 0.5s ease;
+    .img-container.clicked .tapadera {
+      opacity: 0;
+      pointer-events: none;
     }
 
     @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+      to { opacity: 1; }
     }
 
     .texto-lorem {
@@ -110,7 +85,7 @@
       border-radius: 12px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       padding: 1.2rem;
-      max-width: 600px;
+      max-width: 700px;
       margin: 2.5rem auto;
       font-size: 1.1rem;
       line-height: 1.7;
@@ -123,26 +98,18 @@
       margin-bottom: 1rem;
     }
 
-    /* Mensaje sorpresa */
-    #mensajeSorpresa {
-      display: none;
-      background-color: #6a2045;
-      color: #ff69b4;
-      font-size: 2rem;
-      text-align: center;
-      padding: 1rem 2rem;
-      border-radius: 15px;
-      box-shadow: 0 0 20px #ff69b4;
-      max-width: 90vw;
-      margin: 2rem auto;
-      font-weight: 700;
-      user-select: none;
-      animation: fadeInMessage 1s ease forwards;
+    #galeria {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
 
-    @keyframes fadeInMessage {
-      from {opacity: 0; transform: scale(0.8);}
-      to {opacity: 1; transform: scale(1);}
+    #foto6-container {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
     }
 
     @media (max-width: 600px) {
@@ -154,20 +121,46 @@
         font-size: 1rem;
         line-height: 1.6;
         padding: 1rem;
-        max-width: 90vw;
       }
 
-      img.foto {
+      .foto {
         max-width: 100%;
       }
 
-      img.foto6 {
-        max-width: 100%;
+      .img-container {
+        max-width: 90%;
       }
     }
 
+    .heart {
+      position: absolute;
+      color: #ff69b4;
+      font-size: 0.8rem;
+      animation: fall linear infinite;
+      opacity: 0.7;
+      z-index: 0;
+      user-select: none;
+      pointer-events: none;
+      transform: translateY(0);
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh); opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
+
+    canvas {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
     #kissBtn {
-      background: linear-gradient(135deg, #ff9ebf, #ff69b4);
+      background: linear-gradient(135deg, #ff9ebf, #ff69b4, #ff80ab);
+      background-size: 200% 200%;
+      animation: glowShift 5s ease infinite;
       border: none;
       border-radius: 14px;
       color: white;
@@ -180,18 +173,11 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, #ff9ebf, #ff69b4, #ff80ab);
-      background-size: 200% 200%;
-      animation: glowShift 5s ease infinite;
     }
 
     @keyframes glowShift {
-      0% {
-        background-position: 0% 50%;
-      }
-      100% {
-        background-position: 100% 50%;
-      }
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
     }
 
     #kissBtn:hover {
@@ -203,191 +189,147 @@
 </head>
 <body>
 
-  <h1><span class="resaltado">Mi</span> Persona Especial</h1>
+<h1><span class="resaltado">Mi</span> Caramelito De Café ❤️</h1>
 
-  <div id="galeria">
+<div id="galeria">
+  <div class="img-container">
     <img src="img/foto1.jpeg" class="foto" />
+    <div class="tapadera"></div>
+  </div>
+  <div class="img-container">
     <img src="img/foto2.jpeg" class="foto" />
+    <div class="tapadera"></div>
+  </div>
+  <div class="img-container">
     <img src="img/foto3.jpeg" class="foto" />
+    <div class="tapadera"></div>
+  </div>
+  <div class="img-container">
     <img src="img/foto4.jpeg" class="foto" />
+    <div class="tapadera"></div>
+  </div>
+  <div class="img-container">
     <img src="img/foto5.jpeg" class="foto" />
+    <div class="tapadera"></div>
   </div>
+</div>
 
-  <div class="texto-lorem">
-    <h2>Nosotros</h2>
-    <p>
-      Ya pasaron 6 meses desde que nos conocimos, y aún sigue vivido en mi memoria esa tarde en la que empezamos a hablar por un meme sin gracia de BTC.<br>
-      Tantas noches hablando, jugando o simplemente haciéndonos compañía. Antes de que siquiera haya pasado algo, ya sentía que te conocía desde hace tiempo y la pasaba (paso) muy bien siempre que estoy contigo.<br>
-      No me di ni cuenta y ya pude tener la fortuna de poder llamarte mi pareja, poder ser esa persona con la que pasas tiempo y quieres.<br>
-      Seis meses no es una cantidad corta de tiempo, y hasta ahora sigo teniendo el mismo sentimiento de esa vez que me di cuenta que ambos nos queríamos de la misma forma —acepto que yo tardé en darme cuenta—, de igual manera, cada día es más bonito teniéndote a mi lado.<br>
-      Espero poder seguir siendo por un largo tiempo esa persona que llamas "tu amor", tu pareja, esa persona que está a tu lado y apoya en todo, porque por más que sé que seguro tendremos problemas, quiero que los resolvamos juntos, porque sé que tú eres la persona que quiero a mi lado.
-    </p>
-    <p style="text-align: center; margin-top: 2rem;">
-      Gracias por dejarme considerarte a ti Mi Persona Especial ♡
-    </p>
-    <p style="text-align: center; margin-top: 1.5rem; font-size: small;">
-      Atte: mycb
-    </p>
+<canvas id="canvas"></canvas>
+
+<div class="texto-lorem">
+  <h2>Nosotros</h2>
+  <p>
+    Ya pasaron 6 meses desde que nos conocimos, y aún sigue vivido en mi memoria esa tarde en la que empezamos a hablar por un meme sin gracia de BTC.<br>
+    Tantas noches hablando, jugando o simplemente haciéndonos compañía. Antes de que siquiera haya pasado algo, ya sentía que te conocía desde hace tiempo y la pasaba (paso) muy bien siempre que estoy contigo.<br>
+    No me di ni cuenta y ya pude tener la fortuna de poder llamarte mi pareja, poder ser esa persona con la que pasas tiempo y quieres.<br>
+    Seis meses no es una cantidad corta de tiempo, y hasta ahora sigo teniendo el mismo sentimiento de esa vez que me di cuenta que ambos nos queríamos de la misma forma —acepto que yo tardé en darme cuenta—, de igual manera, cada día es más bonito teniéndote a mi lado.<br>
+    Espero poder seguir siendo por un largo tiempo esa persona que llamas "tu amor", tu pareja, esa persona que está a tu lado y apoya en todo, porque por más que sé que seguro tendremos problemas, quiero que los resolvamos juntos, porque sé que tú eres la persona que quiero a mi lado.
+  </p>
+  <p style="text-align: center; margin-top: 2rem;">
+    Gracias por dejarme considerarte a ti Mi Persona Especial ♡
+  </p>
+  <p style="text-align: center; margin-top: 1.5rem; font-size: small;">
+    Atte: mycb
+  </p>
+</div>
+
+<div id="foto6-container">
+  <div class="img-container">
+    <img src="img/foto6.jpeg" class="foto" />
+    <div class="tapadera" style="background-color: rgba(255, 105, 180, 0.6);"></div>
   </div>
+</div>
 
-  <!-- Última imagen con filtro rosa -->
-  <img src="img/foto6.jpeg" class="foto foto6" id="foto6" />
+<div style="text-align: center; margin: 2rem 0;">
+  <button id="kissBtn">kiss?</button>
+</div>
 
-  <!-- Mensaje sorpresa -->
-  <div id="mensajeSorpresa">MI Caramelito De Cafe ♡</div>
+<div id="kissGifContainer" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 1000;">
+  <img src="https://media2.giphy.com/media/3oz8xsaLjLVqVXr3tS/giphy.gif" alt="kiss gif" style="max-width: 300px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.7);" />
+</div>
 
-  <!-- Botón ¿kiss? -->
-  <div style="text-align: center; margin: 2rem 0;">
-    <button id="kissBtn">
-      kiss?
-    </button>
-  </div>
-
-  <!-- GIF oculto -->
-  <div id="kissGifContainer" style="
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-    z-index: 1000;
-  ">
-    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExendlbzZ3ZjFsd290c2RoaHYzdWxmdjV2cHhudTZ1Y3BvN2x0cW1wMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oz8xsaLjLVqVXr3tS/giphy.gif" alt="kiss gif" style="max-width: 300px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.7);" />
-  </div>
-
-  <script>
-    const kissBtn = document.getElementById('kissBtn');
-    const kissGifContainer = document.getElementById('kissGifContainer');
-
-    kissBtn.addEventListener('click', () => {
-      // Animación tipo "pop"
-      kissBtn.style.transform = 'scale(0.96)';
-      setTimeout(() => kissBtn.style.transform = 'scale(1)', 150);
-
-      // Mostrar el gif con duración exacta
-      kissGifContainer.style.pointerEvents = 'auto';
-      kissGifContainer.style.opacity = '1';
-
-      setTimeout(() => {
-        kissGifContainer.style.opacity = '0';
-      }, 2000);
-
-      setTimeout(() => {
-        kissGifContainer.style.pointerEvents = 'none';
-      }, 2200);
+<script>
+  // Tapaderas
+  document.querySelectorAll('.img-container').forEach(container => {
+    container.addEventListener('click', () => {
+      container.classList.add('clicked');
     });
+  });
 
-    // Mostrar mensaje sorpresa al hacer click en la última imagen
-    const foto6 = document.getElementById('foto6');
-    const mensajeSorpresa = document.getElementById('mensajeSorpresa');
+  // Botón kiss
+  const kissBtn = document.getElementById('kissBtn');
+  const kissGifContainer = document.getElementById('kissGifContainer');
 
-    foto6.addEventListener('click', () => {
-      mensajeSorpresa.style.display = 'block';
-      // Desaparece después de 4 segundos
-      setTimeout(() => {
-        mensajeSorpresa.style.display = 'none';
-      }, 4000);
-    });
-  </script>
+  kissBtn.addEventListener('click', () => {
+    kissBtn.style.transform = 'scale(0.96)';
+    setTimeout(() => kissBtn.style.transform = 'scale(1)', 150);
+    kissGifContainer.style.pointerEvents = 'auto';
+    kissGifContainer.style.opacity = '1';
+    setTimeout(() => {
+      kissGifContainer.style.opacity = '0';
+      kissGifContainer.style.pointerEvents = 'none';
+    }, 2200);
+  });
 
-  <!-- Corazones -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      for (let i = 0; i < 80; i++) {
-        const heart = document.createElement('span');
-        heart.textContent = ['💖', '💕', '💗', '💓', '💘'][Math.floor(Math.random() * 5)];
-        heart.className = 'heart';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = 4 + Math.random() * 4 + 's';
-        heart.style.fontSize = (0.6 + Math.random() * 0.4) + 'rem';
-        heart.style.top = '-' + (Math.random() * 20 + 5) + 'vh';
-        document.body.appendChild(heart);
+  // Corazones flotantes
+  document.addEventListener('DOMContentLoaded', () => {
+    for (let i = 0; i < 80; i++) {
+      const heart = document.createElement('span');
+      heart.textContent = ['💖', '💕', '💗', '💓', '💘'][Math.floor(Math.random() * 5)];
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 4 + Math.random() * 4 + 's';
+      heart.style.fontSize = (0.6 + Math.random() * 0.4) + 'rem';
+      heart.style.top = '-' + (Math.random() * 20 + 5) + 'vh';
+      document.body.appendChild(heart);
+    }
+  });
+
+  // Canvas TE AMO
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const text = "TE AMO";
+  const fontSize = 16;
+  const columns = Math.floor(canvas.width / (fontSize * 4));
+  const drops = [];
+
+  for (let i = 0; i < columns; i++) {
+    drops[i] = Math.random() * canvas.height / fontSize;
+  }
+
+  ctx.font = fontSize + "px monospace";
+
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#ff69b4";
+
+    for (let i = 0; i < drops.length; i++) {
+      const x = i * fontSize * 4;
+      const y = drops[i] * fontSize;
+      ctx.fillText(text, x, y);
+      if (y > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
       }
-    });
-  </script>
+      drops[i] += 0.1;
+    }
+  }
 
-  <!-- Canvas "TE AMO" -->
-  <script>
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
+  function animate() {
+    drawMatrix();
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
-    const text = "TE AMO";
-    const fontSize = 16;
-    const columns = Math.floor(canvas.width / (fontSize * 4));
-    const drops = [];
-
-    for (let i = 0; i < columns; i++) {
-      drops[i] = Math.random() * canvas.height / fontSize;
-    }
-
-    ctx.font = fontSize + "px monospace";
-
-    function drawMatrix() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#6A2045";
-
-      for (let i = 0; i < drops.length; i++) {
-        const x = i * fontSize * 4;
-        const y = drops[i] * fontSize;
-        ctx.fillText(text, x, y);
-
-        if (y > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-
-        drops[i] += 0.1;
-      }
-    }
-
-    let particles = [];
-
-    canvas.addEventListener('click', (e) => {
-      for (let i = 0; i < 20; i++) {
-        particles.push({
-          x: e.clientX,
-          y: e.clientY,
-          vx: (Math.random() - 0.5) * 4,
-          vy: (Math.random() - 0.5) * 4,
-          alpha: 1,
-          size: fontSize + Math.random() * 8
-        });
-      }
-    });
-
-    function drawParticles() {
-      particles.forEach((p, index) => {
-        ctx.globalAlpha = p.alpha;
-        ctx.font = p.size + "px monospace";
-        ctx.fillStyle = "#ff007f";
-        ctx.fillText("TE AMO", p.x, p.y);
-        p.x += p.vx;
-        p.y += p.vy;
-        p.alpha -= 0.01;
-        if (p.alpha <= 0) {
-          particles.splice(index, 1);
-        }
-      });
-      ctx.globalAlpha = 1;
-    }
-
-    function animate() {
-      drawMatrix();
-      drawParticles();
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-  </script>
+  });
+</script>
 
 </body>
 </html>
+
