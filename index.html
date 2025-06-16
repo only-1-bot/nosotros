@@ -30,26 +30,32 @@
       margin-bottom: 2rem;
     }
 h1 {
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid hotpink;
-  animation: typing 3s steps(25, end), blink 0.6s step-end infinite;
+  position: relative;
+  display: inline-block;
   color: hotpink;
   font-size: 3.5rem;
+  margin: 2rem auto;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing-center 3s steps(25) forwards;
   text-align: center;
-  position: relative;
-  padding: 0 2rem;
-  margin-bottom: 2rem;
+  transform: translateX(-50%);
+  left: 50%;
+  border-right: 2px solid hotpink;
+  animation-delay: 0.5s;
 }
 
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+@keyframes typing-center {
+  from {
+    clip-path: inset(0 50% 0 50%);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
 }
-
-@keyframes blink {
-  from, to { border-color: transparent }
-  50% { border-color: hotpink }
+.resaltado {
+  font-weight: bold;
+  color: deeppink;
 }
     h1::before,
     h1::after {
@@ -146,7 +152,7 @@ h1 {
 </head>
 <body>
 
-  <h1><b>Mí</b> Persona Especial.</h1>
+  <h1><span class="resaltado">Mí</span> Persona Especial.</h1>
 
   <div class="tabla-fotos" id="galeria" class="fade-in"></div>
 
