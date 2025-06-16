@@ -39,9 +39,17 @@
       }
     }
 
+    canvas {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
     h1 {
       color: hotpink;
-      font-size: 3rem;
+      font-size: 3.5rem;
       text-align: center;
       margin-top: 2rem;
     }
@@ -58,7 +66,6 @@
       font-weight: bold;
     }
 
-    /* Galería con efecto tapadera */
     #galeria {
       display: flex;
       flex-direction: column;
@@ -67,47 +74,35 @@
       margin-bottom: 2rem;
     }
 
-    .imagen-revelar {
-      position: relative;
+    img.foto {
+      width: 100%;
       max-width: 400px;
-      width: 100%;
+      border: 2px solid #ff69b4;
       border-radius: 10px;
-      overflow: hidden;
-
-      /* Conserva el borde */
       box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
-      border: 2px solid deeppink;
-      background: #2a0a2a;
-    }
-
-    .imagen-revelar img.foto {
-      width: 100%;
-      display: block;
-      border-radius: 10px;
-      user-select: none;
-      opacity: 1; /* visible desde el inicio, la máscara tapa */
-      transition: opacity 0.6s ease;
-      pointer-events: none;
-    }
-
-    .mascara {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(255, 105, 180, 0.85);
-      transition: opacity 0.6s ease;
-      cursor: pointer;
-      border-radius: 10px;
-      z-index: 2;
-    }
-
-    /* Máscara con más opacidad para foto6 */
-    .imagen-revelar.mascara-opaca .mascara {
-      background-color: rgba(255, 105, 180, 0.95);
-    }
-
-    .imagen-revelar.ocultar .mascara {
       opacity: 0;
-      pointer-events: none;
+      animation: fadeIn 1s ease forwards;
+      cursor: pointer;
+      transition: filter 0.3s ease;
+    }
+
+    /* Última imagen con filtro rosa */
+    img.foto6 {
+      filter: sepia(0.3) saturate(3) hue-rotate(-20deg) brightness(1.1);
+      opacity: 1 !important;
+      margin-top: 2rem;
+      max-width: 350px;
+    }
+
+    img.foto6:hover {
+      filter: none;
+      transition: filter 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
 
     .texto-lorem {
@@ -115,7 +110,7 @@
       border-radius: 12px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       padding: 1.2rem;
-      max-width: 700px;
+      max-width: 600px;
       margin: 2.5rem auto;
       font-size: 1.1rem;
       line-height: 1.7;
@@ -128,6 +123,28 @@
       margin-bottom: 1rem;
     }
 
+    /* Mensaje sorpresa */
+    #mensajeSorpresa {
+      display: none;
+      background-color: #6a2045;
+      color: #ff69b4;
+      font-size: 2rem;
+      text-align: center;
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #ff69b4;
+      max-width: 90vw;
+      margin: 2rem auto;
+      font-weight: 700;
+      user-select: none;
+      animation: fadeInMessage 1s ease forwards;
+    }
+
+    @keyframes fadeInMessage {
+      from {opacity: 0; transform: scale(0.8);}
+      to {opacity: 1; transform: scale(1);}
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 2.2rem;
@@ -137,13 +154,14 @@
         font-size: 1rem;
         line-height: 1.6;
         padding: 1rem;
+        max-width: 90vw;
       }
 
-      #galeria {
-        gap: 1.2rem;
+      img.foto {
+        max-width: 100%;
       }
 
-      .imagen-revelar {
+      img.foto6 {
         max-width: 100%;
       }
     }
@@ -162,6 +180,7 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      background: linear-gradient(135deg, #ff9ebf, #ff69b4, #ff80ab);
       background-size: 200% 200%;
       animation: glowShift 5s ease infinite;
     }
@@ -187,26 +206,11 @@
   <h1><span class="resaltado">Mi</span> Persona Especial</h1>
 
   <div id="galeria">
-    <div class="imagen-revelar">
-      <img src="img/foto1.jpeg" class="foto" alt="Foto 1" />
-      <div class="mascara"></div>
-    </div>
-    <div class="imagen-revelar">
-      <img src="img/foto2.jpeg" class="foto" alt="Foto 2" />
-      <div class="mascara"></div>
-    </div>
-    <div class="imagen-revelar">
-      <img src="img/foto3.jpeg" class="foto" alt="Foto 3" />
-      <div class="mascara"></div>
-    </div>
-    <div class="imagen-revelar">
-      <img src="img/foto4.jpeg" class="foto" alt="Foto 4" />
-      <div class="mascara"></div>
-    </div>
-    <div class="imagen-revelar">
-      <img src="img/foto5.jpeg" class="foto" alt="Foto 5" />
-      <div class="mascara"></div>
-    </div>
+    <img src="img/foto1.jpeg" class="foto" />
+    <img src="img/foto2.jpeg" class="foto" />
+    <img src="img/foto3.jpeg" class="foto" />
+    <img src="img/foto4.jpeg" class="foto" />
+    <img src="img/foto5.jpeg" class="foto" />
   </div>
 
   <div class="texto-lorem">
@@ -226,18 +230,20 @@
     </p>
   </div>
 
-  <!-- foto6 después del texto, con mayor opacidad en la máscara -->
-  <div class="imagen-revelar mascara-opaca" style="max-width: 400px; margin: 2rem auto;">
-    <img src="img/foto6.jpeg" class="foto" alt="Foto 6" />
-    <div class="mascara"></div>
-  </div>
+  <!-- Última imagen con filtro rosa -->
+  <img src="img/foto6.jpeg" class="foto foto6" id="foto6" />
 
-  <canvas id="canvas"></canvas>
+  <!-- Mensaje sorpresa -->
+  <div id="mensajeSorpresa">MI Caramelito De Cafe ♡</div>
 
+  <!-- Botón ¿kiss? -->
   <div style="text-align: center; margin: 2rem 0;">
-    <button id="kissBtn">kiss?</button>
+    <button id="kissBtn">
+      kiss?
+    </button>
   </div>
 
+  <!-- GIF oculto -->
   <div id="kissGifContainer" style="
     position: fixed;
     top: 50%;
@@ -256,29 +262,54 @@
     const kissGifContainer = document.getElementById('kissGifContainer');
 
     kissBtn.addEventListener('click', () => {
+      // Animación tipo "pop"
       kissBtn.style.transform = 'scale(0.96)';
       setTimeout(() => kissBtn.style.transform = 'scale(1)', 150);
 
+      // Mostrar el gif con duración exacta
       kissGifContainer.style.pointerEvents = 'auto';
       kissGifContainer.style.opacity = '1';
 
       setTimeout(() => {
         kissGifContainer.style.opacity = '0';
-      }, 2500);
+      }, 2000);
 
       setTimeout(() => {
         kissGifContainer.style.pointerEvents = 'none';
       }, 2200);
     });
 
-    // Efecto tapadera para revelar imágenes
-    document.querySelectorAll('.imagen-revelar').forEach(div => {
-      div.querySelector('.mascara').addEventListener('click', () => {
-        div.classList.add('ocultar');
-      });
-    });
+    // Mostrar mensaje sorpresa al hacer click en la última imagen
+    const foto6 = document.getElementById('foto6');
+    const mensajeSorpresa = document.getElementById('mensajeSorpresa');
 
-    // Canvas "TE AMO"
+    foto6.addEventListener('click', () => {
+      mensajeSorpresa.style.display = 'block';
+      // Desaparece después de 4 segundos
+      setTimeout(() => {
+        mensajeSorpresa.style.display = 'none';
+      }, 4000);
+    });
+  </script>
+
+  <!-- Corazones -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      for (let i = 0; i < 80; i++) {
+        const heart = document.createElement('span');
+        heart.textContent = ['💖', '💕', '💗', '💓', '💘'][Math.floor(Math.random() * 5)];
+        heart.className = 'heart';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = 4 + Math.random() * 4 + 's';
+        heart.style.fontSize = (0.6 + Math.random() * 0.4) + 'rem';
+        heart.style.top = '-' + (Math.random() * 20 + 5) + 'vh';
+        document.body.appendChild(heart);
+      }
+    });
+  </script>
+
+  <!-- Canvas "TE AMO" -->
+  <script>
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -356,22 +387,7 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     });
-
-    // Corazones
-    document.addEventListener('DOMContentLoaded', () => {
-      for (let i = 0; i < 80; i++) {
-        const heart = document.createElement('span');
-        heart.textContent = ['💖', '💕', '💗', '💓', '💘'][Math.floor(Math.random() * 5)];
-        heart.className = 'heart';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = 4 + Math.random() * 4 + 's';
-        heart.style.fontSize = (0.6 + Math.random() * 0.4) + 'rem';
-        heart.style.top = '-' + (Math.random() * 20 + 5) + 'vh';
-        document.body.appendChild(heart);
-      }
-    });
   </script>
 
 </body>
 </html>
-
