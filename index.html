@@ -81,7 +81,11 @@
       width: 100%;
       border-radius: 10px;
       overflow: hidden;
+
+      /* Aquí conservamos el borde original que tenías */
       box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+      border: 2px solid deeppink;
+      background: #2a0a2a;
     }
 
     .imagen-revelar img.foto {
@@ -91,6 +95,7 @@
       user-select: none;
       opacity: 1; /* visible desde el inicio, la máscara tapa */
       transition: opacity 0.6s ease;
+      pointer-events: none; /* para que el clic pase a la máscara */
     }
 
     .mascara {
@@ -179,7 +184,6 @@
       color: #ffe4f1;
       text-shadow: 2px 2px 5px rgba(255, 105, 180, 0.9);
     }
-
   </style>
 </head>
 <body>
@@ -207,6 +211,12 @@
       <img src="img/foto5.jpeg" class="foto" alt="Foto 5" />
       <div class="mascara"></div>
     </div>
+
+    <!-- Última imagen con efecto tapadera también -->
+    <div class="imagen-revelar">
+      <img src="img/foto6.jpeg" class="foto" alt="Foto 6" />
+      <div class="mascara"></div>
+    </div>
   </div>
 
   <canvas id="canvas"></canvas>
@@ -227,8 +237,6 @@
       Atte: mycb
     </p>
   </div>
-
-  <img src="img/foto6.jpeg" class="foto" style="display: block; margin: 0 auto; margin-top: 2rem;" alt="Foto 6" />
 
   <!-- Botón ¿kiss? -->
   <div style="text-align: center; margin: 2rem 0;">
@@ -376,3 +384,4 @@
 
 </body>
 </html>
+
