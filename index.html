@@ -16,17 +16,17 @@
     }
 
     /* Corazones */
-.heart {
-  position: absolute;
-  color: #ff69b4;
-  font-size: 0.8rem;
-  animation: fall linear infinite;
-  opacity: 0.7;
-  z-index: 0;
-  user-select: none;
-  pointer-events: none;
-  transform: translateY(0); /* 👈 Asegura inicio de la animación */
-}
+    .heart {
+      position: absolute;
+      color: #ff69b4;
+      font-size: 0.8rem;
+      animation: fall linear infinite;
+      opacity: 0.7;
+      z-index: 0;
+      user-select: none;
+      pointer-events: none;
+      transform: translateY(0);
+    }
 
     @keyframes fall {
       0% {
@@ -38,6 +38,7 @@
         opacity: 0;
       }
     }
+
     canvas {
       display: block;
       position: fixed;
@@ -65,6 +66,7 @@
       font-weight: bold;
     }
 
+    /* Galería con efecto tapadera */
     #galeria {
       display: flex;
       flex-direction: column;
@@ -73,20 +75,37 @@
       margin-bottom: 2rem;
     }
 
-    img.foto {
-      width: 100%;
+    .imagen-revelar {
+      position: relative;
       max-width: 400px;
-      border: 2px solid #ff69b4;
+      width: 100%;
       border-radius: 10px;
+      overflow: hidden;
       box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
     }
 
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+    .imagen-revelar img.foto {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      user-select: none;
+      opacity: 1; /* visible desde el inicio, la máscara tapa */
+      transition: opacity 0.6s ease;
+    }
+
+    .mascara {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(255, 105, 180, 0.85);
+      transition: opacity 0.6s ease;
+      cursor: pointer;
+      border-radius: 10px;
+      z-index: 2;
+    }
+
+    .imagen-revelar.ocultar .mascara {
+      opacity: 0;
+      pointer-events: none;
     }
 
     .texto-lorem {
@@ -118,44 +137,48 @@
         padding: 1rem;
       }
 
-      img.foto {
+      #galeria {
+        gap: 1.2rem;
+      }
+
+      .imagen-revelar {
         max-width: 100%;
       }
     }
+
     #kissBtn {
-  background: linear-gradient(135deg, #ff9ebf, #ff69b4);
-  border: none;
-  border-radius: 14px;
-  color: white;
-  font-family: 'Quicksand', sans-serif;
-  font-weight: 600;
-  font-size: 1.2rem;
-  padding: 0.8rem 2.2rem;
-  cursor: pointer;
-  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, #ff9ebf, #ff69b4, #ff80ab);
-  background-size: 200% 200%;
-  animation: glowShift 5s ease infinite;
-}
+      background: linear-gradient(135deg, #ff9ebf, #ff69b4);
+      border: none;
+      border-radius: 14px;
+      color: white;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      padding: 0.8rem 2.2rem;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ff9ebf, #ff69b4, #ff80ab);
+      background-size: 200% 200%;
+      animation: glowShift 5s ease infinite;
+    }
 
-@keyframes glowShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
-}
+    @keyframes glowShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
 
-
-#kissBtn:hover {
-  background-color: #ff4081;
-  color: #ffe4f1;
-  text-shadow: 2px 2px 5px rgba(255, 105, 180, 0.9);
-}
+    #kissBtn:hover {
+      background-color: #ff4081;
+      color: #ffe4f1;
+      text-shadow: 2px 2px 5px rgba(255, 105, 180, 0.9);
+    }
 
   </style>
 </head>
@@ -164,11 +187,26 @@
   <h1><span class="resaltado">Mi</span> Persona Especial</h1>
 
   <div id="galeria">
-    <img src="img/foto1.jpeg" class="foto" />
-    <img src="img/foto2.jpeg" class="foto" />
-    <img src="img/foto3.jpeg" class="foto" />
-    <img src="img/foto4.jpeg" class="foto" />
-    <img src="img/foto5.jpeg" class="foto" />
+    <div class="imagen-revelar">
+      <img src="img/foto1.jpeg" class="foto" alt="Foto 1" />
+      <div class="mascara"></div>
+    </div>
+    <div class="imagen-revelar">
+      <img src="img/foto2.jpeg" class="foto" alt="Foto 2" />
+      <div class="mascara"></div>
+    </div>
+    <div class="imagen-revelar">
+      <img src="img/foto3.jpeg" class="foto" alt="Foto 3" />
+      <div class="mascara"></div>
+    </div>
+    <div class="imagen-revelar">
+      <img src="img/foto4.jpeg" class="foto" alt="Foto 4" />
+      <div class="mascara"></div>
+    </div>
+    <div class="imagen-revelar">
+      <img src="img/foto5.jpeg" class="foto" alt="Foto 5" />
+      <div class="mascara"></div>
+    </div>
   </div>
 
   <canvas id="canvas"></canvas>
@@ -190,77 +228,61 @@
     </p>
   </div>
 
-  <img src="img/foto6.jpeg" class="foto" style="display: block; margin: 0 auto; margin-top: 2rem;" />
+  <img src="img/foto6.jpeg" class="foto" style="display: block; margin: 0 auto; margin-top: 2rem;" alt="Foto 6" />
 
- <!-- Botón ¿kiss? -->
-<div style="text-align: center; margin: 2rem 0;">
-<button id="kissBtn">
-  kiss?
-</button>
+  <!-- Botón ¿kiss? -->
+  <div style="text-align: center; margin: 2rem 0;">
+    <button id="kissBtn">
+      kiss?
+    </button>
+  </div>
 
-</div>
+  <!-- GIF oculto -->
+  <div id="kissGifContainer" style="
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 1000;
+  ">
+    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExendlbzZ3ZjFsd290c2RoaHYzdWxmdjV2cHhudTZ1Y3BvN2x0cW1wMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oz8xsaLjLVqVXr3tS/giphy.gif" alt="kiss gif" style="max-width: 300px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.7);" />
+  </div>
 
-<!-- GIF oculto -->
-<div id="kissGifContainer" style="
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-  z-index: 1000;
-">
-  <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExendlbzZ3ZjFsd290c2RoaHYzdWxmdjV2cHhudTZ1Y3BvN2x0cW1wMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oz8xsaLjLVqVXr3tS/giphy.gif" alt="kiss gif" style="max-width: 300px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.7);" />
-</div>
-
-<script>
-  const kissBtn = document.getElementById('kissBtn');
-  const kissGifContainer = document.getElementById('kissGifContainer');
-
-  kissBtn.addEventListener('click', () => {
-    // Animación tipo "pop"
-    kissBtn.style.transform = 'scale(0.96)';
-    setTimeout(() => kissBtn.style.transform = 'scale(1)', 150);
-
-    // Mostrar el gif con duración exacta
-    kissGifContainer.style.pointerEvents = 'auto';
-    kissGifContainer.style.opacity = '1';
-
-    setTimeout(() => {
-      kissGifContainer.style.opacity = '0';
-    }, 2000);
-
-    setTimeout(() => {
-      kissGifContainer.style.pointerEvents = 'none';
-    }, 2200);
-  });
-</script>
-
-  <!-- Corazones -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      for (let i = 0; i < 80; i++) {
-        const heart = document.createElement('span');
-        heart.textContent = ['💖', '💕', '💗', '💓', '💘'][Math.floor(Math.random() * 5)];
-        heart.className = 'heart';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = 4 + Math.random() * 4 + 's';
-        heart.style.fontSize = (0.6 + Math.random() * 0.4) + 'rem';
-        heart.style.top = '-' + (Math.random() * 20 + 5) + 'vh';
-        document.body.appendChild(heart);
-      }
+    const kissBtn = document.getElementById('kissBtn');
+    const kissGifContainer = document.getElementById('kissGifContainer');
+
+    kissBtn.addEventListener('click', () => {
+      kissBtn.style.transform = 'scale(0.96)';
+      setTimeout(() => kissBtn.style.transform = 'scale(1)', 150);
+
+      kissGifContainer.style.pointerEvents = 'auto';
+      kissGifContainer.style.opacity = '1';
+
+      setTimeout(() => {
+        kissGifContainer.style.opacity = '0';
+      }, 2000);
+
+      setTimeout(() => {
+        kissGifContainer.style.pointerEvents = 'none';
+      }, 2200);
     });
-  </script>
 
-  <!-- Canvas "TE AMO" -->
-  <script>
-      // Canvas configuración
+    // Efecto tapadera para revelar imágenes
+    document.querySelectorAll('.imagen-revelar').forEach(div => {
+      div.querySelector('.mascara').addEventListener('click', () => {
+        div.classList.add('ocultar');
+      });
+    });
+
+    // Canvas "TE AMO"
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
 
     const text = "TE AMO";
     const fontSize = 16;
@@ -336,7 +358,21 @@
     });
   </script>
 
+  <!-- Corazones -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      for (let i = 0; i < 80; i++) {
+        const heart = document.createElement('span');
+        heart.textContent = ['💖', '💕', '💗', '💓', '💘'][Math.floor(Math.random() * 5)];
+        heart.className = 'heart';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = 4 + Math.random() * 4 + 's';
+        heart.style.fontSize = (0.6 + Math.random() * 0.4) + 'rem';
+        heart.style.top = '-' + (Math.random() * 20 + 5) + 'vh';
+        document.body.appendChild(heart);
+      }
+    });
+  </script>
+
 </body>
 </html>
-
-
