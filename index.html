@@ -1,7 +1,9 @@
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <title>Solo tú</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
   <style>
     body {
@@ -12,23 +14,31 @@
       font-family: 'Quicksand', sans-serif;
       min-height: 100vh;
       padding: 0 1.2rem 3rem 1.2rem;
+      position: relative;
     }
 
-    body::after {
-  content: "💖 💕 💗 💓 💘";
-  position: fixed;
-  top: -2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2rem;
-  animation: float 10s linear infinite;
-  opacity: 0.3;
-}
+    /* Corazones animados */
+    .heart {
+      position: fixed;
+      color: pink;
+      font-size: 1.5rem;
+      animation: fall linear infinite;
+      opacity: 0.8;
+      z-index: 1;
+      user-select: none;
+      pointer-events: none;
+    }
 
-@keyframes float {
-  0% { top: -2rem; }
-  100% { top: 120%; }
-}
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
 
     canvas {
       display: block;
@@ -50,17 +60,18 @@
       transform: translateX(-50%);
       left: 50%;
       border-right: 2px solid hotpink;
-      animation: typing 3s steps(25) forwards, blink 0.8s step-end infinite;
+      width: 0ch; /* animación máquina de escribir */
+      animation: typing 3s steps(21) forwards, blink 0.8s step-end infinite;
     }
 
     @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+      from { width: 0ch; }
+      to { width: 21ch; } /* Número de caracteres del texto */
     }
 
     @keyframes blink {
-      from, to { border-color: transparent }
-      50% { border-color: hotpink }
+      from, to { border-color: transparent; }
+      50% { border-color: hotpink; }
     }
 
     h1::before,
@@ -72,16 +83,16 @@
       transform: translateY(-50%);
     }
 
-
     h1::before { left: -2rem; }
     h1::after { right: -2rem; }
-    
-.resaltado {
-  font-weight: bold;
-  color: deeppink;
-}
+
+    .resaltado {
+      font-weight: bold;
+      color: deeppink;
+    }
+
     #galeria {
-      max-width: 500px;
+      max-width: 800px;
       margin: 0 auto 3rem auto;
       display: flex;
       flex-direction: column;
@@ -89,21 +100,22 @@
     }
 
     img.foto {
-  width: 100%;
-  max-width: 100%;
-  border: 3px solid #ff69b4;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
-  display: block;
-  margin: 0 auto;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 1s ease forwards;
+      width: 100%;
+      max-width: 800px;
+      border: 3px solid #ff69b4;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+      display: block;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s ease forwards;
+      transition: transform 0.3s ease;
     }
 
     img.foto:hover {
-  transform: rotate(1deg) scale(1.02);
-}
+      transform: rotate(1deg) scale(1.02);
+    }
 
     img.foto:nth-child(1) { animation-delay: 0.2s; }
     img.foto:nth-child(2) { animation-delay: 0.4s; }
@@ -119,21 +131,21 @@
     }
 
     .texto-lorem {
-  background-color: white;
-  border-radius: 12px;
-  margin: 5rem auto 2rem auto;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  text-align: justify;
-  width: 100%;
-  max-width: 100%;
-  padding: 1.5rem 1.2rem;
-  font-size: 1.05rem; /* Aumentado para móviles */
-  line-height: 1.8;
+      background-color: white;
+      border-radius: 12px;
+      margin: 5rem auto 2rem auto;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: justify;
+      width: 100%;
+      max-width: 800px;
+      padding: 1.5rem 1.2rem;
+      font-size: 1.2rem;
+      line-height: 1.8;
     }
 
     .celda-adicional {
       width: 90vw;
-      max-width: 400px;
+      max-width: 800px;
       border: 3px solid #ff69b4;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
@@ -162,36 +174,53 @@
     }
 
     @media (max-width: 600px) {
-  h1 {
-    font-size: 2rem;
-  }
+      h1 {
+        font-size: 2rem;
+        width: 0ch;
+        animation: typing 3s steps(21) forwards, blink 0.8s step-end infinite;
+      }
 
-  .texto-lorem {
-    font-size: 1.1rem;
-    padding: 1.2rem;
-  }
+      .texto-lorem {
+        font-size: 1.1rem;
+        padding: 1.2rem;
+      }
 
-  .celda-adicional {
-    padding: 1rem;
-    font-size: 1rem;
-  }
+      .celda-adicional {
+        padding: 1rem;
+        font-size: 1rem;
+      }
 
-  img.foto {
-    border-width: 2px;
-    border-radius: 10px;
-  }
-}
+      img.foto {
+        border-width: 2px;
+        border-radius: 10px;
+        max-width: 100%;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      h1 {
+        font-size: 4rem;
+      }
+
+      .texto-lorem {
+        font-size: 1.4rem;
+      }
+
+      img.foto {
+        max-width: 700px;
+      }
+    }
   </style>
 </head>
 <body>
 
   <h1><span class="resaltado">Mí</span> Persona Especial.</h1>
 
-  <div class="tabla-fotos" id="galeria" class="fade-in"></div>
+  <div id="galeria"></div>
 
-  <canvas id="canvas" class="fade-in"></canvas>
+  <canvas id="canvas"></canvas>
 
-  <div class="texto-lorem" class="fade-in">
+  <div class="texto-lorem">
     <h2>Nosotros</h2>
     <p>
       Ya pasaron 6 meses desde que conocimos, y aún sigue vivido en mi memoria esa tarde en la que empezamos a hablar por un meme sin gracia de BTC.<br>
@@ -209,11 +238,11 @@
   </div>
 
   <!-- Celda con imagen 6 -->
-  <div class="celda-adicional" class="fade-in">
-    <img src="img/foto6.jpeg" class="foto">
+  <div class="celda-adicional">
+    <img src="img/foto6.jpeg" class="foto" alt="Foto 6" />
   </div>
 
-  <script class="fade-in">
+  <script>
     const imagenes = [
       "img/foto1.jpeg",
       "img/foto2.jpeg",
@@ -227,9 +256,11 @@
       const img = document.createElement("img");
       img.src = url;
       img.className = "foto";
+      img.alt = "Foto";
       galeria.appendChild(img);
     });
 
+    // Canvas configuración
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -309,7 +340,21 @@
     });
   </script>
 
+  <!-- Script para crear corazones caídos -->
+  <script>
+    for (let i = 0; i < 80; i++) {
+      const heart = document.createElement('span');
+      heart.textContent = ['💖', '💕', '💗', '💓', '💘'][Math.floor(Math.random() * 5)];
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 3 + Math.random() * 5 + 's';
+      heart.style.fontSize = 1 + Math.random() * 2 + 'rem';
+      document.body.appendChild(heart);
+    }
+  </script>
+
 </body>
 </html>
+
 
 
