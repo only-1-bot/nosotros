@@ -194,10 +194,9 @@
 
  <!-- Botón ¿kiss? -->
 <div style="text-align: center; margin: 2rem 0;">
-  <button id="kissBtn">
-    ¿kiss?
-  </button>
-</div>
+<button id="kissBtn">
+  ¿kiss?
+</button>
 
 </div>
 
@@ -206,23 +205,24 @@
   const kissGifContainer = document.getElementById('kissGifContainer');
 
   kissBtn.addEventListener('click', () => {
-    // Animación "pop"
+    // Animación tipo "pop"
     kissBtn.style.transform = 'scale(0.96)';
     setTimeout(() => kissBtn.style.transform = 'scale(1)', 150);
 
-    // Mostrar el gif
+    // Mostrar el gif con duración exacta
     kissGifContainer.style.pointerEvents = 'auto';
     kissGifContainer.style.opacity = '1';
 
     setTimeout(() => {
       kissGifContainer.style.opacity = '0';
-    }, 1700); // visible 1.7s
+    }, 1700);
 
     setTimeout(() => {
       kissGifContainer.style.pointerEvents = 'none';
-    }, 2200); // esperar 0.5s para desaparecer
+    }, 2200);
   });
 </script>
+
 
 <!-- GIF oculto -->
 <div id="kissGifContainer" style="
@@ -237,23 +237,6 @@
 ">
   <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExendlbzZ3ZjFsd290c2RoaHYzdWxmdjV2cHhudTZ1Y3BvN2x0cW1wMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oz8xsaLjLVqVXr3tS/giphy.gif" alt="kiss gif" style="max-width: 300px; border-radius: 12px; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.7);" />
 </div>
-
-<script>
-kissBtn.addEventListener('click', () => {
-  kissGifContainer.style.pointerEvents = 'auto';
-  kissGifContainer.style.opacity = '1';
-
-  // GIF visible por casi 1.7s, luego fade-out de 0.5s
-  setTimeout(() => {
-    kissGifContainer.style.opacity = '0';
-  }, 1700);
-
-  setTimeout(() => {
-    kissGifContainer.style.pointerEvents = 'none';
-  }, 2200);
-});
-
-</script>
 
   <!-- Corazones -->
   <script>
