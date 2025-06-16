@@ -181,18 +181,19 @@
   <!-- Botón ¿kiss? -->
 <div style="text-align: center; margin: 2rem 0;">
   <button id="kissBtn" style="
-  kissBtn.addEventListener('click', () => {
+kissBtn.addEventListener('click', () => {
   kissGifContainer.style.pointerEvents = 'auto';
   kissGifContainer.style.opacity = '1';
 
   setTimeout(() => {
-    kissGifContainer.style.opacity = '0'; // empieza el fade-out (0.5s por CSS)
-  }, 3000); // tiempo visible completo sin fade
+    kissGifContainer.style.opacity = '0';
+  }, 1800); // mostrar durante 1.8s antes de iniciar fade-out
 
   setTimeout(() => {
-    kissGifContainer.style.pointerEvents = 'none'; // después de fade-out
-  }, 3500);
+    kissGifContainer.style.pointerEvents = 'none';
+  }, 2300); // esperar 0.5s para completar el fade-out
 });
+
 ">
     ¿kiss?
   </button>
