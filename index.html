@@ -10,7 +10,7 @@
       overflow: auto;
       cursor: pointer;
       min-height: 100vh;
-      padding: 0 1.5rem 3rem 1.5rem; /* agrega 3rem de espacio al final */
+      padding: 0 1.5rem 3rem 1.5rem;
     }
 
     canvas {
@@ -38,16 +38,18 @@
       top: 50%;
       transform: translateY(-50%);
     }
+
     h1::before {
       left: 0;
     }
+
     h1::after {
       right: 0;
     }
 
     #galeria {
       max-width: 320px;
-      margin: 0 auto 4.5rem auto; /* espacio abajo */
+      margin: 0 auto 4.5rem auto;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
@@ -104,7 +106,7 @@
 </head>
 <body>
 
-  <h1><b>Mí</b>  Persona  Especial.</h1>
+  <h1><b>Mí</b> Persona Especial.</h1>
 
   <div class="tabla-fotos" id="galeria"></div>
 
@@ -114,31 +116,31 @@
     <h2>Nosotros</h2>
     <p>
       Ya pasaron 6 meses desde que conocimos, y aún sigue vivido en mi memoria esa tarde en la que empezamos a hablar por un meme sin gracia de BTC.<br>
-      Tantas noches hablando, jugando o simplemente haciendonos compañia. Antes de que siquiera haya pasado algo, ya sentia que te conocia desde hace tiempo y la pasaba (paso) muy bien siempre que estoy contigo.<br>
+      Tantas noches hablando, jugando o simplemente haciéndonos compañía. Antes de que siquiera haya pasado algo, ya sentía que te conocía desde hace tiempo y la pasaba (paso) muy bien siempre que estoy contigo.<br>
       No me di ni cuenta y ya pude tener la fortuna de poder llamarte mi pareja, poder ser esa persona con la que pasas tiempo y quieres.<br>
-      Seis meses no es una cantidad corta de tiempo, y hasta ahora sigo teniendo el mismo sentimiento de esa vez que me di cuenta que ambos nos queriamos de la misma forma -acepto que yo tarde en darme cuenta-, de igual manera, cada dia es más bonito teniendote a mi lado.<br>
-      Espero poder seguir siendo por un largo tiempo esa persona que llamas "tu amor", tu pareja, esa persona que esta a tu lado y apoya en todo, porqué por más que sé que seguro tendremos problemas, quiero que los resolvamos juntos, por que sé tú eres la persona que quiero a mi lado.<br>
+      Seis meses no es una cantidad corta de tiempo, y hasta ahora sigo teniendo el mismo sentimiento de esa vez que me di cuenta que ambos nos queríamos de la misma forma —acepto que yo tardé en darme cuenta—, de igual manera, cada día es más bonito teniéndote a mi lado.<br>
+      Espero poder seguir siendo por un largo tiempo esa persona que llamas "tu amor", tu pareja, esa persona que está a tu lado y apoya en todo, porque por más que sé que seguro tendremos problemas, quiero que los resolvamos juntos, porque sé que tú eres la persona que quiero a mi lado.<br>
     </p>
     <p style="text-align: center; margin-top: 2rem;">
-      Gracias por dejarme considerarte a tí Mi Persona Especial ♡
+      Gracias por dejarme considerarte a ti Mi Persona Especial ♡
     </p>
     <p style="text-align: center; margin-top: 2rem; font-size: small;">
       Atte: mycb
     </p>
   </div>
 
-  <!-- CELDA CON FOTO6 -->
+  <!-- Celda con imagen 6 -->
   <div class="celda-adicional">
-    <img src="nosotros/img/foto6.jpg" class="foto">
+    <img src="img/foto6.jpg" class="foto" alt="Foto 6">
   </div>
 
   <script>
     const imagenes = [
-      "nosotros/img/foto1.jpg",
-      "nosotros/img/foto2.jpg",
-      "nosotros/img/foto3.jpg",
-      "nosotros/img/foto4.jpg",
-      "nosotros/img/foto5.jpg"
+      "img/foto1.jpg",
+      "img/foto2.jpg",
+      "img/foto3.jpg",
+      "img/foto4.jpg",
+      "img/foto5.jpg"
     ];
 
     const galeria = document.getElementById("galeria");
@@ -158,7 +160,8 @@
     const fontSize = 16;
     const columns = Math.floor(canvas.width / (fontSize * 4));
     const drops = [];
-    for(let i = 0; i < columns; i++) {
+
+    for (let i = 0; i < columns; i++) {
       drops[i] = Math.random() * canvas.height / fontSize;
     }
 
@@ -167,8 +170,8 @@
     function drawMatrix() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
       ctx.fillStyle = "#6A2045";
+
       for (let i = 0; i < drops.length; i++) {
         const x = i * fontSize * 4;
         const y = drops[i] * fontSize;
@@ -229,4 +232,5 @@
 
 </body>
 </html>
+
 
