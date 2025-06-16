@@ -29,7 +29,28 @@
       padding: 0 2rem;
       margin-bottom: 2rem;
     }
+h1 {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid hotpink;
+  animation: typing 3s steps(25, end), blink 0.6s step-end infinite;
+  color: hotpink;
+  font-size: 3.5rem;
+  text-align: center;
+  position: relative;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+}
 
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: hotpink }
+}
     h1::before,
     h1::after {
       content: "♡";
@@ -48,7 +69,7 @@
     }
 
     #galeria {
-      max-width: 320px;
+      max-width: 500px;
       margin: 0 auto 4.5rem auto;
       display: flex;
       flex-direction: column;
@@ -56,18 +77,23 @@
     }
 
     img.foto {
-      width: 280px;
+      width: 100%;
       border: 4px solid #ff69b4;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
       display: block;
       margin: 0 auto;
+      max-width: 500px;
     }
 
     img.foto[src$="foto6.jpg"] {
-      border: none;
-      box-shadow: none;
-      background-color: transparent;
+      width: 100%;
+      border: 4px solid #ff69b4;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+      display: block;
+      margin: 0 auto;
+      max-width: 500px;
     }
 
     h2 {
@@ -90,7 +116,7 @@
 
     .celda-adicional {
       background-color: white;
-      max-width: 350px;
+      max-width: 500px;
       margin: 3rem auto 4rem auto;
       padding: 2rem;
       border-radius: 15px;
@@ -102,17 +128,31 @@
       text-align: center;
       font-family: monospace;
     }
+
+    .fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
   </style>
 </head>
 <body>
 
   <h1><b>Mí</b> Persona Especial.</h1>
 
-  <div class="tabla-fotos" id="galeria"></div>
+  <div class="tabla-fotos" id="galeria" class="fade-in"></div>
 
-  <canvas id="canvas"></canvas>
+  <canvas id="canvas" class="fade-in"></canvas>
 
-  <div class="texto-lorem">
+  <div class="texto-lorem" class="fade-in">
     <h2>Nosotros</h2>
     <p>
       Ya pasaron 6 meses desde que conocimos, y aún sigue vivido en mi memoria esa tarde en la que empezamos a hablar por un meme sin gracia de BTC.<br>
@@ -130,11 +170,11 @@
   </div>
 
   <!-- Celda con imagen 6 -->
-  <div class="celda-adicional">
+  <div class="celda-adicional" class="fade-in">
     <img src="img/foto6.jpeg" class="foto">
   </div>
 
-  <script>
+  <script class="fade-in">
     const imagenes = [
       "img/foto1.jpeg",
       "img/foto2.jpeg",
