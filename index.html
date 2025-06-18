@@ -197,29 +197,42 @@
   </style>
 </head>
 <body>
-
+<h1><span class="resaltado">Mi</span> Persona Especial</h1>
 <!-- Galería tipo carrusel -->
-<div class="slider-container">
-  <div class="slider">
-    <img src="img/foto1.jpeg" alt="Foto 1" class="foto" />
-    <img src="img/foto2.jpeg" alt="Foto 2" class="foto" />
-    <img src="img/foto3.jpeg" alt="Foto 3" class="foto" />
-    <img src="img/foto4.jpeg" alt="Foto 4" class="foto" />
-    <img src="img/foto5.jpeg" alt="Foto 5" class="foto" />
-    <img src="img/foto6.jpeg" alt="Foto 6" class="foto" />
-  </div>
+<div class="slider-wrapper">
   <button class="slider-btn prev">←</button>
+
+  <div class="slider-container">
+    <div class="slider">
+      <img src="img/foto1.jpeg" alt="Foto 1" class="foto" />
+      <img src="img/foto2.jpeg" alt="Foto 2" class="foto" />
+      <img src="img/foto3.jpeg" alt="Foto 3" class="foto" />
+      <img src="img/foto4.jpeg" alt="Foto 4" class="foto" />
+      <img src="img/foto5.jpeg" alt="Foto 5" class="foto" />
+      <img src="img/foto6.jpeg" alt="Foto 6" class="foto" />
+    </div>
+  </div>
+
   <button class="slider-btn next">→</button>
 </div>
-  
+
 <style>
+  .slider-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3rem auto 2rem;
+    gap: 0.5rem;
+  }
+
   .slider-container {
     position: relative;
     max-width: 300px;
-    margin: 3rem auto 2rem;
+    width: 100%;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+    flex-shrink: 0;
   }
 
   .slider {
@@ -229,31 +242,42 @@
 
   .slider img {
     width: 100%;
+    height: 400px; /* Fijamos altura uniforme */
+    object-fit: cover;
     flex-shrink: 0;
     border: 2px solid hotpink;
     border-radius: 10px;
   }
 
   .slider-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     background: hotpink;
     color: white;
     border: none;
     border-radius: 50%;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     padding: 0.5rem 0.8rem;
     cursor: pointer;
-    z-index: 1;
+    box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+    transition: transform 0.2s;
   }
 
-  .slider-btn.prev {
-    left: 10px;
+  .slider-btn:hover {
+    transform: scale(1.1);
   }
 
-  .slider-btn.next {
-    right: 10px;
+  @media (max-width: 600px) {
+    .slider-wrapper {
+      gap: 0.3rem;
+    }
+
+    .slider-btn {
+      font-size: 1.1rem;
+      padding: 0.4rem 0.6rem;
+    }
+
+    .slider img {
+      height: 300px;
+    }
   }
 </style>
 
@@ -277,6 +301,7 @@
     }
   });
 </script>
+
 
   <div class="texto-lorem">
     <h2>Nosotros</h2>
