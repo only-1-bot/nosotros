@@ -44,32 +44,26 @@
     }
 
     /* Contenedor imagen: debe tener position relative para que tapadera funcione */
-.img-container {
-  position: relative;
-  max-width: 300px;
-  width: 100%;
-  height: 100% 
-  margin: 0 auto 2rem;
-  cursor: pointer;
-  aspect-ratio: 3/4; /* Nuevo: da una altura proporcionada */
-}
+    .img-container {
+      position: relative;
+      max-width: 300px;
+      width: 100%;
+      margin: 0 auto 2rem;
+      cursor: pointer;
+    }
 
     /* Imagen: block para que no quede espacio debajo y ocupa 100% del contenedor */
-.foto {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border: 2px solid #ff69b4;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
-  display: block;
-  opacity: 1;
-  transition: opacity 0.5s ease;
-  user-select: none;
-}
-
+    .foto {
+      width: 100%;
+      height: 100%;
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+      display: block;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+      user-select: none;
+    }
 
     /* Tapadera rosa: posición absoluta cubriendo toda la imagen */
     .tapadera {
@@ -303,5 +297,6 @@
 
 
 </html>
+
 
 
