@@ -251,6 +251,21 @@
 </div>
 
 <script>
+   // Botón "kiss"
+  const kissBtn = document.getElementById('kissBtn');
+  const kissGifContainer = document.getElementById('kissGifContainer');
+
+  kissBtn.addEventListener('click', () => {
+    kissBtn.style.transform = 'scale(0.96)';
+    setTimeout(() => kissBtn.style.transform = 'scale(1)', 150);
+    kissGifContainer.style.pointerEvents = 'auto';
+    kissGifContainer.style.opacity = '1';
+    setTimeout(() => {
+      kissGifContainer.style.opacity = '0';
+      kissGifContainer.style.pointerEvents = 'none';
+    }, 3000);
+  });
+  
   // Slider funcionalidad
 
 const slider = document.querySelector('.slider');
