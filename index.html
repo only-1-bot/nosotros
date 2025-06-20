@@ -307,32 +307,7 @@
   
   // Slider funcionalidad
 
-const slider = document.querySelector('.slider');
-const sliderContainer = document.querySelector('.slider-container');
-const images = slider.querySelectorAll('img');
-const totalImages = images.length;
-
-let currentIndex = 0;
-
-// Ajustamos el ancho del slider y de cada imagen al ancho del contenedor
-function ajustarAnchos() {
-  const slideWidth = sliderContainer.offsetWidth;
-  slider.style.width = `${slideWidth * totalImages}px`;
-  images.forEach(img => {
-    img.style.width = `${slideWidth}px`;
-  });
-  moverSlider();
-}
-
-// Mover slider según índice actual
-function moverSlider() {
-  const slideWidth = sliderContainer.offsetWidth;
-  slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-}
-
-//texto activo y fade.in fade.out
-const slider = document.querySelector('.slider');
-const images = slider.querySelectorAll('img');
+const images = document.querySelectorAll('.slider img');
 const prevBtn = document.querySelector('.slider-btn.prev');
 const nextBtn = document.querySelector('.slider-btn.next');
 const description = document.querySelector('.slider-description');
@@ -352,7 +327,7 @@ function updateSlider(index) {
   images.forEach((img, i) => {
     img.classList.toggle('active', i === index);
   });
-  
+
   // Animar texto con fade out - fade in
   description.classList.remove('visible');
   setTimeout(() => {
@@ -361,7 +336,7 @@ function updateSlider(index) {
   }, 300);
 }
 
-// Inicializar slider
+// Inicializar
 updateSlider(currentIndex);
 
 nextBtn.addEventListener('click', () => {
@@ -373,6 +348,7 @@ prevBtn.addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + images.length) % images.length;
   updateSlider(currentIndex);
 });
+
 
 // Botones
 const prevBtn = document.querySelector('.slider-btn.prev');
