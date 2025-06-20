@@ -149,16 +149,15 @@
       box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
       flex-shrink: 0;
       border: 2px solid hotpink;
-      
     }
     
-.slider img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  display:block;
-}
+    .slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      display:block;
+    }
 
     .slider-btn {
       background: hotpink;
@@ -175,32 +174,33 @@
     .slider-btn:hover {
       transform: scale(1.1);
     }
+
     .slider {
-  display: flex;
-  flex-direction: row; /* Esto es clave */
-  transition: transform 0.5s ease;
-  height: 100%;
-  width: max-content;
-}
+      display: flex;
+      flex-direction: row; /* Esto es clave */
+      transition: transform 0.5s ease;
+      height: 100%;
+      width: max-content;
+    }
 
-.slide {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  flex-shrink: 0;
-  transition: transform 0.5s ease;
-  height: 100%;
-}
+    .slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      flex-shrink: 0;
+      transition: transform 0.5s ease;
+      height: 100%;
+    }
 
-.caption {
-  color: hotpink;
-  font-size: 1rem;
-  margin-top: 0.5rem;
-  text-align: center;
-  font-weight: 600;
-  font-family: 'Quicksand', sans-serif;
-}
+    .caption {
+      color: hotpink;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      text-align: center;
+      font-weight: 600;
+      font-family: 'Quicksand', sans-serif;
+    }
 
     @media (max-width: 600px) {
       h1 {
@@ -238,33 +238,34 @@
   <button class="slider-btn prev">←</button>
   
   <div class="slider-container">
-    
-   <div class="slider">
-  <div class="slide">
-    <img src="img/foto1.jpeg" alt="Foto 1" />
-    <p class="caption">Nuestro primer momento inolvidable</p>
-  </div>
-  <div class="slide">
-    <img src="img/foto2.jpeg" alt="Foto 2" />
-    <p class="caption">Esa risa que me encanta</p>
-  </div>
-  <div class="slide">
-    <img src="img/foto3.jpeg" alt="Foto 3" />
-    <p class="caption">Siempre brillando</p>
-  </div>
-  <div class="slide">
-    <img src="img/foto4.jpeg" alt="Foto 4" />
-    <p class="caption">Un día perfecto contigo</p>
-  </div>
-  <div class="slide">
-    <img src="img/foto5.jpeg" alt="Foto 5" />
-    <p class="caption">Tu mirada lo dice todo</p>
-  </div>
-  <div class="slide">
-    <img src="img/foto6.jpeg" alt="Foto 6" />
-    <p class="caption">Mi persona favorita</p>
-  </div>
+    <div class="slider">
+      <div class="slide">
+        <img src="img/foto1.jpeg" alt="Foto 1" />
+        <p class="caption">Nuestro primer momento inolvidable</p>
+      </div>
+      <div class="slide">
+        <img src="img/foto2.jpeg" alt="Foto 2" />
+        <p class="caption">Esa risa que me encanta</p>
+      </div>
+      <div class="slide">
+        <img src="img/foto3.jpeg" alt="Foto 3" />
+        <p class="caption">Siempre brillando</p>
+      </div>
+      <div class="slide">
+        <img src="img/foto4.jpeg" alt="Foto 4" />
+        <p class="caption">Un día perfecto contigo</p>
+      </div>
+      <div class="slide">
+        <img src="img/foto5.jpeg" alt="Foto 5" />
+        <p class="caption">Tu mirada lo dice todo</p>
+      </div>
+      <div class="slide">
+        <img src="img/foto6.jpeg" alt="Foto 6" />
+        <p class="caption">Mi persona favorita</p>
+      </div>
     </div>
+  </div>
+  
   <button class="slider-btn next">→</button>
 </div>
 
@@ -290,7 +291,7 @@
 </div>
 
 <script>
-   // Botón "kiss"
+  // Botón "kiss"
   const kissBtn = document.getElementById('kissBtn');
   const kissGifContainer = document.getElementById('kissGifContainer');
 
@@ -306,69 +307,68 @@
   });
   
   // Slider funcionalidad
-const slider = document.querySelector('.slider');
-const sliderContainer = document.querySelector('.slider-container');
-const slides = slider.querySelectorAll('.slide');
-const totalImages = slides.length;
-let currentIndex = 0;
+  const slider = document.querySelector('.slider');
+  const sliderContainer = document.querySelector('.slider-container');
+  const slides = slider.querySelectorAll('.slide');
+  const totalImages = slides.length;
+  let currentIndex = 0;
 
-function ajustarAnchos() {
-  const slideWidth = sliderContainer.offsetWidth;
-  slider.style.width = `${slideWidth * totalImages}px`;
-  slides.forEach(slide => {
-    slide.style.width = `${slideWidth}px`;
-  });
-  moverSlider();
-}
-
-function moverSlider() {
-  const slideWidth = sliderContainer.offsetWidth;
-  slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-}
-
-const prevBtn = document.querySelector('.slider-btn.prev');
-const nextBtn = document.querySelector('.slider-btn.next');
-
-nextBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % totalImages;
-  moverSlider();
-});
-
-prevBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-  moverSlider();
-});
-
-window.addEventListener('load', ajustarAnchos);
-window.addEventListener('resize', ajustarAnchos);
-
-
-// Corazones animados
-function crearCorazones(cantidad = 25) {
-  // Limpiar corazones viejos
-  document.querySelectorAll('.heart').forEach(e => e.remove());
-
-  for (let i = 0; i < cantidad; i++) {
-    const heart = document.createElement('span');
-    const corazonTipo = ['💖', '💕', '💗', '💓', '💘'][Math.floor(Math.random() * 5)];
-    heart.textContent = corazonTipo;
-    heart.className = 'heart';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.animationDuration = (4 + Math.random() * 4) + 's';
-    heart.style.fontSize = (0.6 + Math.random() * 0.8) + 'rem';
-    heart.style.top = '-' + (Math.random() * 20 + 5) + 'vh';
-    heart.style.animationDelay = (Math.random() * 10) + 's';
-    heart.style.zIndex = 10;  // subir para que se vea
-    document.body.appendChild(heart);
+  function ajustarAnchos() {
+    const slideWidth = sliderContainer.offsetWidth;
+    slider.style.width = `${slideWidth * totalImages}px`;
+    slides.forEach(slide => {
+      slide.style.width = `${slideWidth}px`;
+    });
+    moverSlider();
   }
-}
 
-crearCorazones(30);
+  function moverSlider() {
+    const slideWidth = sliderContainer.offsetWidth;
+    slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+  }
 
+  const prevBtn = document.querySelector('.slider-btn.prev');
+  const nextBtn = document.querySelector('.slider-btn.next');
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % totalImages;
+    moverSlider();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+    moverSlider();
+  });
+
+  window.addEventListener('load', ajustarAnchos);
+  window.addEventListener('resize', ajustarAnchos);
+
+  // Corazones animados
+  function crearCorazones(cantidad = 25) {
+    // Limpiar corazones viejos
+    document.querySelectorAll('.heart').forEach(e => e.remove());
+
+    for (let i = 0; i < cantidad; i++) {
+      const heart = document.createElement('span');
+      const corazonTipo = ['💖', '💕', '💗', '💓', '💘'][Math.floor(Math.random() * 5)];
+      heart.textContent = corazonTipo;
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+      heart.style.fontSize = (0.6 + Math.random() * 0.8) + 'rem';
+      heart.style.top = '-' + (Math.random() * 20 + 5) + 'vh';
+      heart.style.animationDelay = (Math.random() * 10) + 's';
+      heart.style.zIndex = 10;  // subir para que se vea
+      document.body.appendChild(heart);
+    }
+  }
+
+  crearCorazones(30);
 </script>
 
 </body>
 </html>
+
 
  
 
