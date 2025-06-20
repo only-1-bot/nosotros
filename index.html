@@ -43,7 +43,6 @@
       font-weight: bold;
     }
 
-    /* Texto */
     .texto-lorem {
       background-color: white;
       border-radius: 12px;
@@ -113,7 +112,7 @@
       text-shadow: 2px 2px 5px rgba(255, 105, 180, 0.9);
     }
 
-    /* GIF de beso */
+    /* GIF beso */
     #kissGifContainer {
       position: fixed;
       top: 50%;
@@ -132,204 +131,30 @@
       user-select: none;
     }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2.2rem;
-      }
-
-      .texto-lorem {
-        font-size: 0.8rem;
-        max-width: 90%;
-        padding: 0.8rem 1rem;
-      }
-
-      .img-container {
-        max-width: 90%;
-      }
-
-      #kissBtn {
-        font-size: 1rem;
-        padding: 0.7rem 1.8rem;
-      }
+    /* Slider */
+    .slider-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 3rem auto 2rem;
+      gap: 1rem;
     }
-  </style>
-</head>
-<body>
-<h1><span class="resaltado">Mi</span> Persona Especial</h1>
-<!-- Carrusel cuadrado 1:1 -->
-<div class="slider-wrapper">
-  <button class="slider-btn prev">←</button>
 
-  <div class="slider-container">
-    <div class="slider">
-      <img src="img/foto1.jpeg" alt="Foto 1" class="foto" />
-      <img src="img/foto2.jpeg" alt="Foto 2" class="foto" />
-      <img src="img/foto3.jpeg" alt="Foto 3" class="foto" />
-      <img src="img/foto4.jpeg" alt="Foto 4" class="foto" />
-      <img src="img/foto5.jpeg" alt="Foto 5" class="foto" />
-      <img src="img/foto6.jpeg" alt="Foto 6" class="foto" />
-    </div>
-  </div>
-
-  <button class="slider-btn next">→</button>
-</div>
-
-<style>
-  .slider-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 3rem auto 2rem;
-    gap: 1rem;
-  }
-
-  .slider-container {
-    position: relative;
-    width: 300px;
-    aspect-ratio: 1 / 1; /* formato 1:1 cuadrado */
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
-    flex-shrink: 0;
-    border: 2px solid hotpink;
-  }
-
-.slider {
-  display: flex;
-  transition: transform 0.5s ease;
-  height: 100%;
-  width: calc(100% * 6); /* <--- Asegura espacio horizontal para 6 imágenes */
-}
-
-
-  .slider img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    flex-shrink: 0;
-    border-radius: 10px;
-  }
-
-  .slider-btn {
-    background: hotpink;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    font-size: 1.4rem;
-    padding: 0.5rem 0.8rem;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
-    transition: transform 0.2s;
-  }
-
-  .slider-btn:hover {
-    transform: scale(1.1);
-  }
-
-  @media (max-width: 600px) {
     .slider-container {
-      width: 90vw;
+      position: relative;
+      width: 300px;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+      flex-shrink: 0;
+      border: 2px solid hotpink;
     }
 
-    .slider-btn {
-      font-size: 1.1rem;
-      padding: 0.4rem 0.6rem;
-    }
-  }
-</style>
-
-<script>
-  const slider = document.querySelector('.slider');
-  const prevBtn = document.querySelector('.slider-btn.prev');
-  const nextBtn = document.querySelector('.slider-btn.next');
-  let currentIndex = 0;
-
-  nextBtn.addEventListener('click', () => {
-    if (currentIndex < slider.children.length - 1) {
-      currentIndex++;
-      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
-  });
-
-  prevBtn.addEventListener('click', () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
-  });
-</script>
-
-
-  <div class="texto-lorem">
-    <h2>Nosotros</h2>
-    <p>
-      Ya pasaron 6 meses desde que nos conocimos, y aún sigue vivido en mi memoria esa tarde en la que empezamos a hablar por un meme sin gracia de BTC.<br>
-      Tantas noches hablando, jugando o simplemente haciéndonos compañía. Antes de que siquiera haya pasado algo, ya sentía que te conocía desde hace tiempo y la pasaba (paso) muy bien siempre que estoy contigo.<br>
-      No me di ni cuenta y ya pude tener la fortuna de poder llamarte mi pareja, poder ser esa persona con la que pasas tiempo y quieres.<br>
-      Seis meses no es una cantidad corta de tiempo, y hasta ahora sigo teniendo el mismo sentimiento de esa vez que me di cuenta que ambos nos queríamos de la misma forma —acepto que yo tardé en darme cuenta—, de igual manera, cada día es más bonito teniéndote a mi lado.<br>
-      Espero poder seguir siendo por un largo tiempo esa persona que llamas "tu amor", tu pareja, esa persona que está a tu lado y apoya en todo, porque por más que sé que seguro tendremos problemas, quiero que los resolvamos juntos, porque sé que tú eres la persona que quiero a mi lado.
-    </p>
-    <p style="text-align: center; margin-top: 2rem;">
-      Gracias por dejarme considerarte a ti Mi Persona Especial ♡
-    </p>
-    <p style="text-align: center; margin-top: 1.5rem; font-size: small;">
-      Atte: mycb
-    </p>
-  </div>
-
-  <div class="img-container">
-    <img src="img/foto6.jpeg" alt="Foto 6" class="foto" />
-    <div class="tapadera"></div>
-  </div>
-
-  <button id="kissBtn">kiss?</button>
-
-  <div id="kissGifContainer">
-    <img src="https://media2.giphy.com/media/3oz8xsaLjLVqVXr3tS/giphy.gif" alt="kiss gif" />
-  </div>
-
-  <script>
-
-    // Botón kiss
-    const kissBtn = document.getElementById('kissBtn');
-    const kissGifContainer = document.getElementById('kissGifContainer');
-
-    kissBtn.addEventListener('click', () => {
-      kissBtn.style.transform = 'scale(0.96)';
-      setTimeout(() => kissBtn.style.transform = 'scale(1)', 150);
-      kissGifContainer.style.pointerEvents = 'auto';
-      kissGifContainer.style.opacity = '1';
-      setTimeout(() => {
-        kissGifContainer.style.opacity = '0';
-        kissGifContainer.style.pointerEvents = 'none';
-      }, 3000);
-    });
-
-    // Animación corazones cayendo
-    function crearCorazones() {
-      for (let i = 0; i < 55; i++) {
-        const heart = document.createElement('span');
-        const corazonTipo = ['💖', '💕', '💗', '💓', '💘'][Math.floor(Math.random() * 5)];
-        heart.textContent = corazonTipo;
-        heart.className = 'heart';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (4 + Math.random() * 4) + 's';
-        heart.style.fontSize = (0.6 + Math.random() * 0.4) + 'rem';
-        heart.style.top = '-' + (Math.random() * 20 + 5) + 'vh';
-        heart.style.animationDelay = (Math.random() * 10) + 's';
-        document.body.appendChild(heart);
-      }
-    }
-
-    crearCorazones();
-  </script>
-
-</body>
-</html>
-
-
-</html>
+    .slider {
+      display: flex;
+      height: 100%;
+      width: calc(100% * 6);
 
 
 
