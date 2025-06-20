@@ -155,6 +155,94 @@
       display: flex;
       height: 100%;
       width: calc(100% * 6);
+      transition: transform 0.5s ease;
+    }
 
+    .slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border-radius: 10px;
+      aspect-ratio: 1 / 1;
+    }
+
+    .slider-btn {
+      background: hotpink;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      padding: 0.5rem 0.8rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .slider-btn:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .texto-lorem {
+        font-size: 0.8rem;
+        max-width: 90%;
+        padding: 0.8rem 1rem;
+      }
+
+      .slider-container {
+        width: 90vw;
+      }
+
+      .slider-btn {
+        font-size: 1.1rem;
+        padding: 0.4rem 0.6rem;
+      }
+
+      #kissBtn {
+        font-size: 1rem;
+        padding: 0.7rem 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1><span class="resaltado">Mi</span> Persona Especial</h1>
+
+<div class="slider-wrapper">
+  <button class="slider-btn prev">←</button>
+  <div class="slider-container">
+    <div class="slider">
+      <img src="img/foto1.jpeg" alt="Foto 1" class="foto" />
+      <img src="img/foto2.jpeg" alt="Foto 2" class="foto" />
+      <img src="img/foto3.jpeg" alt="Foto 3" class="foto" />
+      <img src="img/foto4.jpeg" alt="Foto 4" class="foto" />
+      <img src="img/foto5.jpeg" alt="Foto 5" class="foto" />
+      <img src="img/foto6.jpeg" alt="Foto 6" class="foto" />
+    </div>
+  </div>
+  <button class="slider-btn next">→</button>
+</div>
+
+<div class="texto-lorem">
+  <h2>Nosotros</h2>
+  <p>
+    Ya pasaron 6 meses desde que nos conocimos...<br><br>
+    Gracias por dejarme considerarte a ti Mi Persona Especial ♡
+  </p>
+  <p style="text-align: center; margin-top: 1.5rem; font-size: small;">
+    Atte: mycb
+  </p>
+</div>
+
+<button id="kissBtn">kiss?</button>
+
+<div id="kissGifContainer">
+ 
 
 
