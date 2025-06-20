@@ -264,19 +264,26 @@ let currentIndex = 0;
 const prevBtn = document.querySelector('.slider-btn.prev');
 const nextBtn = document.querySelector('.slider-btn.next');
 
+const totalImages = slider.children.length;
+
 nextBtn.addEventListener('click', () => {
   if (currentIndex < totalImages - 1) {
     currentIndex++;
-    slider.style.transform = `translateX(-${(100 / totalImages) * currentIndex}%)`;
+  } else {
+    currentIndex = 0; // Vuelve a la primera imagen
   }
+  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
 });
 
 prevBtn.addEventListener('click', () => {
   if (currentIndex > 0) {
     currentIndex--;
-    slider.style.transform = `translateX(-${(100 / totalImages) * currentIndex}%)`;
+  } else {
+    currentIndex = totalImages - 1; // Vuelve a la última imagen
   }
+  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
 });
+
 
 
   // Botón "kiss"
