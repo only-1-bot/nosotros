@@ -156,11 +156,10 @@
   display: flex;
   transition: transform 0.5s ease;
   height: 100%;
-  width: calc(100% * 6); /* <--- Asegura espacio horizontal para 6 imágenes */
 }
 
 .slider img {
-  width: 300%;
+  width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
@@ -253,26 +252,32 @@
 
 <script>
   // Slider funcionalidad
-  const slider = document.querySelector('.slider');
-  const prevBtn = document.querySelector('.slider-btn.prev');
-  const nextBtn = document.querySelector('.slider-btn.next');
-  let currentIndex = 0;
+const slider = document.querySelector('.slider');
+const images = slider.querySelectorAll('img');
+const totalImages = images.length;
 
-  nextBtn.addEventListener('click', () => {
-    if (currentIndex < slider.children.length - 1) {
-      currentIndex++;
-      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
-  });
+// Establece el ancho del slider en función de la cantidad de imágenes
+slider.style.width = `${totalImages * 100}%`;
 
-  prevBtn.addEventListener('click', () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      const slideWidth = document.querySelector('.slider-container').offsetWidth;
-slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+let currentIndex = 0;
 
-    }
+const prevBtn = document.querySelector('.slider-btn.prev');
+const nextBtn = document.querySelector('.slider-btn.next');
+
+nextBtn.addEventListener('click', () => {
+  if (currentIndex < totalImages - 1) {
+    currentIndex++;
+    slider.style.transform = `translateX(-${(100 / totalImages) * currentIndex}%)`;
+  }
 });
+
+prevBtn.addEventListener('click', () => {
+  if (currentIndex > 0) {
+    currentIndex--;
+    slider.style.transform = `translateX(-${(100 / totalImages) * currentIndex}%)`;
+  }
+});
+
 
   // Botón "kiss"
   const kissBtn = document.getElementById('kissBtn');
