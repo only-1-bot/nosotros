@@ -252,72 +252,72 @@
 
 <script>
   // Slider funcionalidad
+
 const slider = document.querySelector('.slider');
+const sliderContainer = document.querySelector('.slider-container');
 const images = slider.querySelectorAll('img');
 const totalImages = images.length;
 
-// Establece el ancho del slider en función de la cantidad de imágenes
-slider.style.width = `${totalImages * 100}%`;
-
 let currentIndex = 0;
 
+// Ajustamos el ancho del slider y de cada imagen al ancho del contenedor
+function ajustarAnchos() {
+  const slideWidth = sliderContainer.offsetWidth;
+  slider.style.width = `${slideWidth * totalImages}px`;
+  images.forEach(img => {
+    img.style.width = `${slideWidth}px`;
+  });
+  moverSlider();
+}
+
+// Mover slider según índice actual
+function moverSlider() {
+  const slideWidth = sliderContainer.offsetWidth;
+  slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+}
+
+// Botones
 const prevBtn = document.querySelector('.slider-btn.prev');
 const nextBtn = document.querySelector('.slider-btn.next');
 
-const totalImages = slider.children.length;
-
 nextBtn.addEventListener('click', () => {
-  if (currentIndex < totalImages - 1) {
-    currentIndex++;
-  } else {
-    currentIndex = 0; // Vuelve a la primera imagen
-  }
-  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+  currentIndex++;
+  if (currentIndex >= totalImages) currentIndex = 0; // loop
+  moverSlider();
 });
 
 prevBtn.addEventListener('click', () => {
-  if (currentIndex > 0) {
-    currentIndex--;
-  } else {
-    currentIndex = totalImages - 1; // Vuelve a la última imagen
-  }
-  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+  currentIndex--;
+  if (currentIndex < 0) currentIndex = totalImages - 1; // loop
+  moverSlider();
 });
 
+// Ajustar anchos al cargar y al cambiar tamaño de ventana
+window.addEventListener('load', ajustarAnchos);
+window.addEventListener('resize', ajustarAnchos);
 
+// Corazones animados
+function crearCorazones(cantidad = 25) {
+  // Limpiar corazones viejos
+  document.querySelectorAll('.heart').forEach(e => e.remove());
 
-  // Botón "kiss"
-  const kissBtn = document.getElementById('kissBtn');
-  const kissGifContainer = document.getElementById('kissGifContainer');
-
-  kissBtn.addEventListener('click', () => {
-    kissBtn.style.transform = 'scale(0.96)';
-    setTimeout(() => kissBtn.style.transform = 'scale(1)', 150);
-    kissGifContainer.style.pointerEvents = 'auto';
-    kissGifContainer.style.opacity = '1';
-    setTimeout(() => {
-      kissGifContainer.style.opacity = '0';
-      kissGifContainer.style.pointerEvents = 'none';
-    }, 3000);
-  });
-
-  // Corazones animados
-  function crearCorazones() {
-    for (let i = 0; i < 55; i++) {
-      const heart = document.createElement('span');
-      const corazonTipo = ['💖', '💕', '💗', '💓', '💘'][Math.floor(Math.random() * 5)];
-      heart.textContent = corazonTipo;
-      heart.className = 'heart';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (4 + Math.random() * 4) + 's';
-      heart.style.fontSize = (0.6 + Math.random() * 0.4) + 'rem';
-      heart.style.top = '-' + (Math.random() * 20 + 5) + 'vh';
-      heart.style.animationDelay = (Math.random() * 10) + 's';
-      document.body.appendChild(heart);
-    }
+  for (let i = 0; i < cantidad; i++) {
+    const heart = document.createElement('span');
+    const corazonTipo = ['💖', '💕', '💗', '💓', '💘'][Math.floor(Math.random() * 5)];
+    heart.textContent = corazonTipo;
+    heart.className = 'heart';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+    heart.style.fontSize = (0.6 + Math.random() * 0.8) + 'rem';
+    heart.style.top = '-' + (Math.random() * 20 + 5) + 'vh';
+    heart.style.animationDelay = (Math.random() * 10) + 's';
+    heart.style.zIndex = 10;  // subir para que se vea
+    document.body.appendChild(heart);
   }
+}
 
-  crearCorazones();
+crearCorazones(30);
+
 </script>
 
 </body>
