@@ -160,13 +160,12 @@
 }
 
 .slider img {
-  width: 100%;
+  width: 300%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 10px;
+  display:block;
 }
-
-
 
     .slider-btn {
       background: hotpink;
@@ -269,7 +268,9 @@
   prevBtn.addEventListener('click', () => {
     if (currentIndex > 0) {
       currentIndex--;
-      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+      const slideWidth = document.querySelector('.slider-container').offsetWidth;
+slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+
     }
 });
 
