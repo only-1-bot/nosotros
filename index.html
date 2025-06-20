@@ -180,6 +180,7 @@
   flex-direction: row; /* Esto es clave */
   transition: transform 0.5s ease;
   height: 100%;
+  width: max-content;
 }
 
 .slide {
@@ -305,50 +306,42 @@
   });
   
   // Slider funcionalidad
-
 const slider = document.querySelector('.slider');
 const sliderContainer = document.querySelector('.slider-container');
 const slides = slider.querySelectorAll('.slide');
 const totalImages = slides.length;
-
 let currentIndex = 0;
 
-// Ajustamos el ancho del slider y de cada imagen al ancho del contenedor
 function ajustarAnchos() {
   const slideWidth = sliderContainer.offsetWidth;
   slider.style.width = `${slideWidth * totalImages}px`;
   slides.forEach(slide => {
-  slide.style.width = `${slideWidth}px`;
-});
-
+    slide.style.width = `${slideWidth}px`;
+  });
   moverSlider();
 }
 
-// Mover slider según índice actual
 function moverSlider() {
   const slideWidth = sliderContainer.offsetWidth;
   slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 }
 
-// Botones
 const prevBtn = document.querySelector('.slider-btn.prev');
 const nextBtn = document.querySelector('.slider-btn.next');
 
 nextBtn.addEventListener('click', () => {
-  currentIndex++;
-  if (currentIndex >= totalImages) currentIndex = 0; // loop
+  currentIndex = (currentIndex + 1) % totalImages;
   moverSlider();
 });
 
 prevBtn.addEventListener('click', () => {
-  currentIndex--;
-  if (currentIndex < 0) currentIndex = totalImages - 1; // loop
+  currentIndex = (currentIndex - 1 + totalImages) % totalImages;
   moverSlider();
 });
 
-// Ajustar anchos al cargar y al cambiar tamaño de ventana
 window.addEventListener('load', ajustarAnchos);
 window.addEventListener('resize', ajustarAnchos);
+
 
 // Corazones animados
 function crearCorazones(cantidad = 25) {
