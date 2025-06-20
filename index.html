@@ -175,6 +175,13 @@
     .slider-btn:hover {
       transform: scale(1.1);
     }
+    .slider {
+  display: flex;
+  flex-direction: row; /* Esto es clave */
+  transition: transform 0.5s ease;
+  height: 100%;
+}
+
 .slide {
   display: flex;
   flex-direction: column;
