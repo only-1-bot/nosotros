@@ -154,10 +154,9 @@
     
 .slider {
   display: flex;
-  height: 100%;
-  width: 600%; /* equivalente a 6 imágenes */
-  transform: translateX(0); /* empieza en la posición 0 */
   transition: transform 0.5s ease;
+  height: 100%;
+  width: calc(100% * 6); /* <--- Asegura espacio horizontal para 6 imágenes */
 }
 
 
@@ -200,7 +199,6 @@
       .slider-container {
         width: 90vw;
         background-color: #fff0f5;
-        overflow: hidden;
       }
 
       .slider-btn {
@@ -274,16 +272,6 @@
       currentIndex--;
       slider.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
-  });
-  
-nextBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % slider.children.length;
-  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-});
-
-prevBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + slider.children.length) % slider.children.length;
-  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
 });
 
   // Botón "kiss"
