@@ -481,7 +481,6 @@ kissBtn.addEventListener('click', () => {
     }
   }
 document.getElementById("verCartaBtn").addEventListener("click", () => {
-  document.getElementById("cartaModal").style.display = "flex";
 });
 const cartaModal = document.getElementById("cartaModal");
 const verCartaBtn = document.getElementById("verCartaBtn");
@@ -494,6 +493,7 @@ verCartaBtn.addEventListener("click", () => {
 cerrarBtn.addEventListener("click", () => {
   cartaModal.classList.remove("activo");
 });
+
 
 
   crearCorazones(30);
