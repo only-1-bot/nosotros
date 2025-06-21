@@ -226,18 +226,37 @@
         padding: 0.7rem 1.8rem;
       }
     }
-    #showCarta {
-  display: block;
-  margin: 2rem auto;
-  background-color: deeppink;
-  color: white;
+ #verCartaBtn {
+  background: linear-gradient(135deg, #ff9ebf, #ff69b4, #ff80ab);
+  background-size: 200% 200%;
+  animation: glowShift 5s ease infinite;
   border: none;
-  padding: 0.6rem 1.4rem;
-  border-radius: 10px;
-  font-size: 1rem;
+  border-radius: 16px;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  padding: 1rem 2.5rem;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+  box-shadow: 0 10px 24px rgba(255, 105, 180, 0.35);
+  transition: all 0.3s ease;
+  margin: 2rem auto;
+  display: block;
+  user-select: none;
 }
+
+#verCartaBtn:hover {
+  background-color: #ff4081;
+  color: #ffe4f1;
+  text-shadow: 2px 2px 5px rgba(255, 105, 180, 0.9);
+  transform: scale(1.05);
+}
+
+@keyframes glowShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
 
 #cartaModal {
   position: fixed;
@@ -248,6 +267,27 @@
   align-items: center;
   z-index: 999;
 }
+.cartaContenido button {
+  background: linear-gradient(135deg, #ff9ebf, #ff69b4);
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: 'Quicksand', sans-serif;
+  color: white;
+  font-weight: 600;
+  margin-top: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+  transition: background 0.3s, transform 0.2s ease;
+}
+
+.cartaContenido button:hover {
+  background: #ff4081;
+  transform: scale(1.05);
+}
+
+  
   </style>
 </head>
 <body>
@@ -321,22 +361,9 @@
   <button class="slider-btn next">→</button>
 </div>
 
-<div class="texto-lorem">
-  <h2>Nosotros</h2>
-  <p>
-    Ya pasaron 6 meses desde que nos conocimos, y aún sigue vivido en mi memoria esa tarde en la que empezamos a hablar por un meme sin gracia de BTC.<br>
-      Tantas noches hablando, jugando o simplemente haciéndonos compañía. Antes de que siquiera haya pasado algo, ya sentía que te conocía desde hace tiempo y la pasaba (paso) muy bien siempre que estoy contigo.<br>
-      No me di ni cuenta y ya pude tener la fortuna de poder llamarte mi pareja, poder ser esa persona con la que pasas tiempo y quieres.<br>
-      Seis meses no es una cantidad corta de tiempo, y hasta ahora sigo teniendo el mismo sentimiento de esa vez que me di cuenta que ambos nos queríamos de la misma forma —acepto que yo tardé en darme cuenta—, de igual manera, cada día es más bonito teniéndote a mi lado.<br>
-      Espero poder seguir siendo por un largo tiempo esa persona que llamas "tu amor", tu pareja, esa persona que está a tu lado y apoya en todo, porque por más que sé que seguro tendremos problemas, quiero que los resolvamos juntos, porque sé que tú eres la persona que quiero a mi lado..<br><br>
-    Gracias por dejarme considerarte a ti Mi Persona Especial ♡
-  </p>
-  <p style="text-align: center; margin-top: 1.5rem; font-size: small;">
-    Atte: mycb
-  </p>
-</div>
-  
-<button id="showCarta">Ver carta 💌</button>
+
+<button id="verCartaBtn">Ver carta</button>
+
 <div id="cartaModal">
   <div class="texto-lorem">
    <h2>Nosotros</h2>
