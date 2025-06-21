@@ -170,17 +170,22 @@ h1::after {
   transition: transform 0.2s;
   z-index: 10;
 }
+@media (max-width: 600px) {
+  .slider-wrapper {
+    padding: 0 3.5rem;
+  }
 
- .slider-btn.prev {
+  .slider-btn.prev {
     left: 0;
-    transform: translateX(-100%);
     top: 50%;
-}
+    transform: translateY(-50%) translateX(-100%);
+  }
 
-.slider-btn.next {
+  .slider-btn.next {
     right: 0;
-    transform: translateX(100%);
     top: 50%;
+    transform: translateY(-50%) translateX(100%);
+  }
 }
 
 .slider-btn:hover {
@@ -207,18 +212,23 @@ h1::after {
 
 .caption {
   color: #ffb6c1;
+  font-size: 1rem;
   margin-top: 0.5rem;
   text-align: center;
   font-weight: 600;
   font-family: 'Quicksand', sans-serif;
   max-width: 100%;
   overflow-wrap: break-word;
-      font-size: 0.9rem;
-    padding: 0 0.5rem;
-    min-height: 1.4rem;
-    line-height: 1.4rem;
+  padding: 0 0.5rem; /* un poco de espacio lateral para que no toque bordes */
+  box-sizing: border-box;
 }
 
+/* En móvil */
+@media (max-width: 600px) {
+  .caption {
+    font-size: 0.9rem;
+    padding: 0 1rem; /* más espacio lateral para evitar que quede tapado */
+  }
 /* Media queries para móviles */
 @media (max-width: 600px) {
   h1 {
