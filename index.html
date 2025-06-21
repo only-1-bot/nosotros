@@ -7,109 +7,109 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
-      margin: 0;
-      font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(-45deg, #0d0d0d, #1a1a1a, #0d0d0d);
-      background-size: 400% 400%;
-      animation: fondoMovimiento 15s ease infinite;
-      padding: 0 1rem 3rem;
-      overflow-x: hidden;
-      min-height: 100vh;
-      position: relative;
-    }
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(-45deg, #0d0d0d, #1a1a1a, #0d0d0d);
+  background-size: 400% 400%;
+  animation: fondoMovimiento 15s ease infinite;
+  padding: 0 1rem 3rem;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
 
-    @keyframes fondoMovimiento {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+@keyframes fondoMovimiento {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-    h1 {
-      color: hotpink;
-      font-size: 2.5rem;
-      text-align: center;
-      margin-top: 2rem;
-    }
+h1 {
+  color: hotpink;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-top: 2rem;
+}
 
-    h1::before,
-    h1::after {
-      content: "♡";
-      font-size: 2rem;
-      margin: 0 0.5rem;
-    }
+h1::before,
+h1::after {
+  content: "♡";
+  font-size: 2rem;
+  margin: 0 0.5rem;
+}
 
-    .resaltado {
-      color: deeppink;
-      font-weight: bold;
-    }
+.resaltado {
+  color: deeppink;
+  font-weight: bold;
+}
 
-    .texto-lorem {
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      padding: 1rem 1.2rem;
-      max-width: 500px;
-      margin: 2rem auto;
-      font-size: 1.1rem;
-      line-height: 1.4;
-      text-align: justify;
-    }
+.texto-lorem {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 1rem 1.2rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  text-align: justify;
+}
 
-    .texto-lorem h2 {
-      color: #ff69b4;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
+.texto-lorem h2 {
+  color: #ff69b4;
+  text-align: center;
+  margin-bottom: 1rem;
+}
 
-    /* Corazones cayendo */
-    .heart {
-      position: fixed;
-      top: -10vh;
-      color: #ff69b4;
-      font-size: 0.8rem;
-      animation-name: fall;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      opacity: 0.7;
-      user-select: none;
-      pointer-events: none;
-      z-index: 0;
-    }
+/* Corazones cayendo */
+.heart {
+  position: fixed;
+  top: -10vh;
+  color: #ff69b4;
+  font-size: 0.8rem;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  opacity: 0.7;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+}
 
-    @keyframes fall {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(110vh); opacity: 0; }
-    }
+@keyframes fall {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
 
-    /* Botón kiss */
-    #kissBtn {
-      background: linear-gradient(135deg, var(--rosa-suave), var(--rosa-vibrante), var(--rosa-suave));
-      animation: glow 5s ease infinite;
-      border:none;
-      border-radius:14px;
-      color:white;
-      font-weight:600;
-      font-size:1.2rem;
-      padding:.8rem 2.2rem;
-      cursor:pointer;
-      box-shadow:0 8px 20px rgba(255,105,180,0.3);
-      transition:all .3s;
-      margin:2rem auto;
-      display:block;
-      user-select:none;
-    }
-    #kissBtn:hover {
-      background: var(--morado);
-      text-shadow: 2px 2px 5px rgba(255,255,255,0.7);
-    }
-    @keyframes glow {
-      0%,100%{filter: drop-shadow(0 0 4px white);}
-      50%{filter:drop-shadow(0 0 12px white);}
-    }
+/* Botón kiss */
+#kissBtn {
+  background: linear-gradient(135deg, var(--rosa-suave), var(--rosa-vibrante), var(--rosa-suave));
+  animation: glow 5s ease infinite;
+  border:none;
+  border-radius:14px;
+  color:white;
+  font-weight:600;
+  font-size:1.2rem;
+  padding:.8rem 2.2rem;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(255,105,180,0.3);
+  transition:all .3s;
+  margin:2rem auto;
+  display:block;
+  user-select:none;
+}
+#kissBtn:hover {
+  background: var(--morado);
+  text-shadow: 2px 2px 5px rgba(255,255,255,0.7);
+}
+@keyframes glow {
+  0%,100%{filter: drop-shadow(0 0 4px white);}
+  50%{filter:drop-shadow(0 0 12px white);}
+}
 
-
-    /* GIF beso */
- #kissVideoContainer {
+/* GIF beso */
+#kissVideoContainer {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -125,104 +125,131 @@
   max-width: 300px;
 }
 
-    /* Slider */
-    .slider-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 3rem auto 2rem;
-      gap: 1rem;
-    }
+/* Slider */
+.slider-wrapper {
+  position: relative;
+  max-width: 500px;
+  margin: 3rem auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
 
-    .slider-container {
-      position: relative;
-      width: 300px;
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
-      flex-shrink: 0;
-      border: 2px solid #ff69b4;
-    }
-    
-    .slider img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 10px;
-      display:block;
-    }
+.slider-container {
+  position: relative;
+  width: 300px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+  flex-shrink: 0;
+  border: 2px solid #ff69b4;
+}
 
-    .slider-btn {
-      background: hotpink;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      font-size: 1.4rem;
-      padding: 0.5rem 0.8rem;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
-      transition: transform 0.2s;
-    }
+.slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  display:block;
+}
 
-    .slider-btn:hover {
-      transform: scale(1.1);
-    }
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: hotpink;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+  transition: transform 0.2s;
+  z-index: 10;
+}
 
-    .slider {
-      display: flex;
-      flex-direction: row; /* Esto es clave */
-      transition: transform 0.5s ease;
-      height: 100%;
-      width: max-content;
-    }
+.slider-btn.prev {
+  left: 10px;
+}
 
-    .slide {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      flex-shrink: 0;
-      transition: transform 0.5s ease;
-      height: 100%;
-    }
+.slider-btn.next {
+  right: 10px;
+}
 
-    .caption {
-      color: #ffb6c1;
-      font-size: 1rem;
-      margin-top: 0.5rem;
-      text-align: center;
-      font-weight: 600;
-      font-family: 'Quicksand', sans-serif;
-    }
+.slider-btn:hover {
+  transform: scale(1.1);
+}
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2.2rem;
-      }
+.slider {
+  display: flex;
+  flex-direction: row; /* Esto es clave */
+  transition: transform 0.5s ease;
+  height: 100%;
+  width: max-content;
+}
 
-      .texto-lorem {
-        font-size: 0.8rem;
-        max-width: 90%;
-        padding: 0.8rem 1rem;
-      }
+.slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex-shrink: 0;
+  transition: transform 0.5s ease;
+  height: 100%;
+}
 
-      .slider-container {
-        width: 90vw;
-        background-color: #fff0f5;
-      }
+.caption {
+  color: #ffb6c1;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  font-family: 'Quicksand', sans-serif;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
 
-      .slider-btn {
-        font-size: 1.1rem;
-        padding: 0.4rem 0.6rem;
-      }
+/* Media queries para móviles */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2.2rem;
+  }
 
-      #kissBtn {
-        font-size: 1rem;
-        padding: 0.7rem 1.8rem;
-      }
-    }
- #verCartaBtn {
+  .texto-lorem {
+    font-size: 0.8rem;
+    max-width: 90%;
+    padding: 0.8rem 1rem;
+  }
+
+  .slider-wrapper {
+    width: 90vw;
+  }
+
+  .slider-container {
+    width: 90vw;
+    background-color: #fff0f5;
+  }
+
+  .slider-btn {
+    font-size: 1.1rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  #kissBtn {
+    font-size: 1rem;
+    padding: 0.7rem 1.8rem;
+  }
+
+  .caption {
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+  }
+}
+
+#verCartaBtn {
   background: linear-gradient(135deg, #ff9ebf, #ff69b4, #ff80ab);
   background-size: 200% 200%;
   animation: glowShift 5s ease infinite;
@@ -261,7 +288,6 @@
   text-shadow: 2px 2px 5px rgba(255, 105, 180, 0.9);
   transform: scale(1.1);
 }
-
 
 #cartaModal {
   opacity: 0;
@@ -304,7 +330,6 @@
   transform: scale(1.05);
 }
 
-  
   </style>
 </head>
 <body>
