@@ -113,23 +113,21 @@
     }
 
     /* GIF beso */
-    #kissGifContainer {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-      z-index: 1000;
-    }
-
-    #kissGifContainer img {
-      max-width: 300px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.7);
-      user-select: none;
-    }
+ #kissVideoContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+#kissVideo {
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.7);
+  max-width: 300px;
+}
 
     /* Slider */
     .slider-wrapper {
@@ -318,25 +316,32 @@
 
 <button id="kissBtn">kiss?</button>
 
-<div id="kissGifContainer">
-  <img src="https://media2.giphy.com/media/3oz8xsaLjLVqVXr3tS/giphy.gif" alt="kiss gif" />
+<!-- Contenedor del "beso" -->
+<div id="kissVideoContainer">
+  <video id="kissVideo" width="300" playsinline muted>
+    <source src="img/kiss.mp4" type="video/mp4">
+  </video>
 </div>
+
 
 <script>
   // Botón "kiss"
-  const kissBtn = document.getElementById('kissBtn');
-  const kissGifContainer = document.getElementById('kissGifContainer');
+const kissBtn = document.getElementById('kissBtn');
+const kissVideoContainer = document.getElementById('kissVideoContainer');
+const kissVideo = document.getElementById('kissVideo');
 
-  kissBtn.addEventListener('click', () => {
-    kissBtn.style.transform = 'scale(0.96)';
-    setTimeout(() => kissBtn.style.transform = 'scale(1)', 150);
-    kissGifContainer.style.pointerEvents = 'auto';
-    kissGifContainer.style.opacity = '1';
-    setTimeout(() => {
-      kissGifContainer.style.opacity = '0';
-      kissGifContainer.style.pointerEvents = 'none';
-    }, 3000);
-  });
+kissBtn.addEventListener('click', () => {
+  kissVideo.currentTime = 0;
+  kissVideo.play();
+  kissVideoContainer.style.opacity = '1';
+  kissVideoContainer.style.pointerEvents = 'auto';
+
+  kissVideo.onended = () => {
+    kissVideoContainer.style.opacity = '0';
+    kissVideoContainer.style.pointerEvents = 'none';
+  };
+});
+
   
   // Slider funcionalidad
   const slider = document.querySelector('.slider');
