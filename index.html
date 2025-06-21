@@ -236,7 +236,7 @@
   color: white;
   font-family: 'Quicksand', sans-serif;
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 2.2rem; /* Más grande para el emoji */
   padding: 1rem 2.5rem;
   cursor: pointer;
   box-shadow: 0 10px 24px rgba(255, 105, 180, 0.35);
@@ -244,19 +244,29 @@
   margin: 2rem auto;
   display: block;
   user-select: none;
-}
-
-#verCartaBtn:hover {
-  background-color: #ff4081;
-  color: #ffe4f1;
-  text-shadow: 2px 2px 5px rgba(255, 105, 180, 0.9);
-  transform: scale(1.05);
+  animation-name: glowShift, pulseScale;
+  animation-duration: 5s, 3s;
+  animation-timing-function: ease, ease-in-out;
+  animation-iteration-count: infinite, infinite;
 }
 
 @keyframes glowShift {
   0% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
 }
+
+@keyframes pulseScale {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+#verCartaBtn:hover {
+  background-color: #ff4081;
+  color: #ffe4f1;
+  text-shadow: 2px 2px 5px rgba(255, 105, 180, 0.9);
+  transform: scale(1.1);
+}
+
 
 #cartaModal {
   opacity: 0;
@@ -374,7 +384,8 @@
 </div>
 
 
-<button id="verCartaBtn">Ver carta</button>
+<button id="verCartaBtn" aria-label="Ver carta">💌</button>
+
 
 <!-- Modal Carta -->
 <div id="cartaModal">
