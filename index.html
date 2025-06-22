@@ -164,35 +164,30 @@
 }
 
 .slide {
-  position: relative; /* necesario para posicionar el caption respecto al slide */
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  flex-shrink: 0;
+  width: 100%; /* aseguramos que la slide ocupe el 100% del contenedor */
+  flex-shrink: 0; /* no se achique */
+  padding-bottom: 0.8rem; /* espacio entre imagen y caption */
 }
 
 .slide img {
   width: 100%;
-  height: 300px;
+  height: 300px; /* fijo para asegurar cuadrado */
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0; /* solo arriba */
   display: block;
 }
 
 .caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.5); /* fondo oscuro semitransparente */
   color: #ffb6c1;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
+  margin-top: 0.3rem;
   text-align: center;
   font-weight: 600;
-  padding: 0.4rem 0;
   font-family: 'Quicksand', sans-serif;
-  border-radius: 0 0 10px 10px;
   user-select: none;
 }
 
@@ -459,74 +454,51 @@ kissBtn.addEventListener('click', () => {
 });
 
   
-  >
+  // Slider funcionalidad
   const slider = document.querySelector('.slider');
   const sliderContainer = document.querySelector('.slider-container');
+  const slides = slider.querySelectorAll('.slide');
+  const totalImages = slides.length;
+  let currentIndex = 0;
+
+  function ajustarAnchos() {
+    const slideWidth = sliderContainer.offsetWidth;
+    slider.style.width = `${slideWidth * totalImages}px`;
+    slides.forEach(slide => {
+      slide.style.width = `${slideWidth}px`;
+    });
+    moverSlider();
+  }
+
+  function moverSlider() {
+    const slideWidth = sliderContainer.offsetWidth;
+    slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+  }
+
   const prevBtn = document.querySelector('.slider-btn.prev');
   const nextBtn = document.querySelector('.slider-btn.next');
 
-  // Clonamos primer y último slide
-  const slides = slider.querySelectorAll('.slide');
-  const firstClone = slides[0].cloneNode(true);
-  const lastClone = slides[slides.length - 1].cloneNode(true);
-
-  // Agregamos clones
-  slider.appendChild(firstClone);
-  slider.insertBefore(lastClone, slides[0]);
-
-  // Actualizamos lista de slides
-  let allSlides = slider.querySelectorAll('.slide');
-  let currentIndex = 1;
-
-  // Establecer ancho inicial
-  function ajustarAnchos() {
-    const slideWidth = sliderContainer.offsetWidth;
-    allSlides.forEach(slide => {
-      slide.style.width = `${slideWidth}px`;
-    });
-    slider.style.width = `${slideWidth * allSlides.length}px`;
-    slider.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-  }
-
-  // Mover slider
-  function moverSlider() {
-    const slideWidth = sliderContainer.offsetWidth;
-    slider.style.transition = 'transform 0.5s ease';
-    slider.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-  }
-
-  // Botones
-  nextBtn.addEventListener('click', () => {
-    if (currentIndex >= allSlides.length - 1) return;
+nextBtn.addEventListener('click', () => {
+  if (currentIndex < totalImages - 1) {
     currentIndex++;
     moverSlider();
-  });
+  }
+});
 
-  prevBtn.addEventListener('click', () => {
-    if (currentIndex <= 0) return;
+prevBtn.addEventListener('click', () => {
+  if (currentIndex > 0) {
     currentIndex--;
     moverSlider();
-  });
+  }
+});
 
-  // Loop infinito
-  slider.addEventListener('transitionend', () => {
-    const slideWidth = sliderContainer.offsetWidth;
-    if (allSlides[currentIndex].isSameNode(firstClone)) {
-      slider.style.transition = 'none';
-      currentIndex = 1;
-      slider.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-    }
-
-    if (allSlides[currentIndex].isSameNode(lastClone)) {
-      slider.style.transition = 'none';
-      currentIndex = allSlides.length - 2;
-      slider.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-    }
-  });
-
-  // Ajustar al cargar y redimensionar
-  window.addEventListener('load', ajustarAnchos);
-  window.addEventListener('resize', () => setTimeout(ajustarAnchos, 100));
+  
+window.addEventListener('load', () => {
+  setTimeout(ajustarAnchos, 100);
+});
+window.addEventListener('resize', () => {
+  setTimeout(ajustarAnchos, 100);
+});
 
 
   // Corazones animados
