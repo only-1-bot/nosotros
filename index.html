@@ -459,86 +459,74 @@ kissBtn.addEventListener('click', () => {
 });
 
   
-  // Slider funcionalidad
+  >
   const slider = document.querySelector('.slider');
   const sliderContainer = document.querySelector('.slider-container');
-  const slides = slider.querySelectorAll('.slide');
-  const totalImages = slides.length;
-  let currentIndex = 0;
-
-function ajustarAnchos() {
-  const slideWidth = sliderContainer.offsetWidth;
-  slider.style.width = `${slideWidth * totalSlides}px`;
-  allSlides.forEach(slide => {
-    slide.style.width = `${slideWidth}px`;
-  });
-  moverSlider();
-}
-
-
-function moverSlider() {
-  const slideWidth = sliderContainer.offsetWidth;
-  slider.style.transition = 'transform 0.5s ease';
-  slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-}
-
-
   const prevBtn = document.querySelector('.slider-btn.prev');
   const nextBtn = document.querySelector('.slider-btn.next');
 
-nextBtn.addEventListener('click', () => {
-  if (currentIndex < totalSlides - 1) {
+  // Clonamos primer y último slide
+  const slides = slider.querySelectorAll('.slide');
+  const firstClone = slides[0].cloneNode(true);
+  const lastClone = slides[slides.length - 1].cloneNode(true);
+
+  // Agregamos clones
+  slider.appendChild(firstClone);
+  slider.insertBefore(lastClone, slides[0]);
+
+  // Actualizamos lista de slides
+  let allSlides = slider.querySelectorAll('.slide');
+  let currentIndex = 1;
+
+  // Establecer ancho inicial
+  function ajustarAnchos() {
+    const slideWidth = sliderContainer.offsetWidth;
+    allSlides.forEach(slide => {
+      slide.style.width = `${slideWidth}px`;
+    });
+    slider.style.width = `${slideWidth * allSlides.length}px`;
+    slider.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+  }
+
+  // Mover slider
+  function moverSlider() {
+    const slideWidth = sliderContainer.offsetWidth;
+    slider.style.transition = 'transform 0.5s ease';
+    slider.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+  }
+
+  // Botones
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex >= allSlides.length - 1) return;
     currentIndex++;
     moverSlider();
-  }
-});
+  });
 
-prevBtn.addEventListener('click', () => {
-  if (currentIndex > 0) {
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex <= 0) return;
     currentIndex--;
     moverSlider();
-  }
-});
+  });
 
-
-  
-window.addEventListener('load', () => {
-  setTimeout(ajustarAnchos, 100);
-});
-window.addEventListener('resize', () => {
-  setTimeout(ajustarAnchos, 100);
-});
-
-  // Clona el primer y último slide
-const firstSlideClone = slides[0].cloneNode(true);
-const lastSlideClone = slides[slides.length - 1].cloneNode(true);
-
-// Agrégalos al inicio y final del slider
-slider.appendChild(firstSlideClone);
-slider.insertBefore(lastSlideClone, slides[0]);
-
-// Actualiza el número total de slides
-const allSlides = slider.querySelectorAll('.slide');
-let totalSlides = allSlides.length;
-
-// Empieza desde el primer "real" slide
-let currentIndex = 1;
-
+  // Loop infinito
   slider.addEventListener('transitionend', () => {
-  const slideWidth = sliderContainer.offsetWidth;
+    const slideWidth = sliderContainer.offsetWidth;
+    if (allSlides[currentIndex].isSameNode(firstClone)) {
+      slider.style.transition = 'none';
+      currentIndex = 1;
+      slider.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+    }
 
-  if (allSlides[currentIndex].isSameNode(firstSlideClone)) {
-    slider.style.transition = 'none';
-    currentIndex = 1;
-    slider.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-  }
+    if (allSlides[currentIndex].isSameNode(lastClone)) {
+      slider.style.transition = 'none';
+      currentIndex = allSlides.length - 2;
+      slider.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+    }
+  });
 
-  if (allSlides[currentIndex].isSameNode(lastSlideClone)) {
-    slider.style.transition = 'none';
-    currentIndex = totalSlides - 2;
-    slider.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-  }
-});
+  // Ajustar al cargar y redimensionar
+  window.addEventListener('load', ajustarAnchos);
+  window.addEventListener('resize', () => setTimeout(ajustarAnchos, 100));
 
 
   // Corazones animados
