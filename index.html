@@ -159,6 +159,23 @@ background: linear-gradient(-45deg, #080808, #222222, #080808);
   max-width: 400px;
 }
 
+#kissVideoContainer::before {
+  content: '';
+  position: absolute;
+  top: -10px; left: -10px; right: -10px; bottom: -10px;
+  background: rgba(255, 105, 180, 0.3);
+  filter: blur(15px);
+  border-radius: 12px;
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+#kissVideoContainer.active-glow::before {
+  opacity: 1;
+}
+
     /* Slider */
 .slider-wrapper {
   margin: 2rem auto 1rem; /* reduce margenes superior e inferior */
