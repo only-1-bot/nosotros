@@ -181,11 +181,11 @@
     .slider-btn:hover {
       transform: scale(1.1);
     }
-
 .slider {
   display: flex;
   flex-direction: row;
   transition: transform 0.5s ease;
+  height: auto; /* cambia de 100% a auto para que se ajuste */
   width: max-content;
 }
 
@@ -196,8 +196,10 @@
   width: 100%;
   flex-shrink: 0;
   transition: transform 0.5s ease;
-  padding-bottom: 0.5rem;
+  /* height: 100%;  */ /* elimina esta línea */
+  padding-bottom: 0.5rem; /* espacio para caption */
 }
+
     .slider-controls {
   display: flex;
   justify-content: center;
