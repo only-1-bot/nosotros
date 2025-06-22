@@ -422,6 +422,24 @@ body {
     opacity: 0;
   }
 }  
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 105, 180, 0.4); /* rosa semi-transparente */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 999; /* Debajo del video que tiene 1000 */
+}
+#overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
   </style>
 </head>
 <body>
@@ -480,6 +498,7 @@ body {
 
 <button id="kissBtn">kiss?</button>
 
+  <div id="overlay"></div>
 <!-- Contenedor del "beso" -->
 <div id="kissVideoContainer">
   <video id="kissVideo" width="300" playsinline muted>
@@ -501,6 +520,26 @@ kissBtn.addEventListener('click', () => {
   kissVideoContainer.style.pointerEvents = 'auto';
 
   kissVideo.onended = () => {
+    kissVideoContainer.style.opacity = '0';
+    kissVideoContainer.style.pointerEvents = 'none';
+  };
+});
+
+  //overlay rosado
+  const overlay = document.getElementById('overlay');
+
+kissBtn.addEventListener('click', () => {
+  kissVideo.currentTime = 0;
+  kissVideo.play();
+  
+  // Mostrar overlay y video
+  overlay.classList.add('active');
+  kissVideoContainer.style.opacity = '1';
+  kissVideoContainer.style.pointerEvents = 'auto';
+
+  kissVideo.onended = () => {
+    // Ocultar overlay y video
+    overlay.classList.remove('active');
     kissVideoContainer.style.opacity = '0';
     kissVideoContainer.style.pointerEvents = 'none';
   };
