@@ -218,6 +218,37 @@
     }
 
     @media (max-width: 600px) {
+      .slider-container {
+  width: 100vw; /* que ocupe todo el ancho móvil */
+  max-width: 100%;
+  aspect-ratio: auto; /* quitar el 1/1 para que no sea cuadrado */
+  height: auto; /* que la altura se ajuste al contenido */
+  padding-bottom: 0; /* quitar padding extra */
+  box-sizing: border-box;
+}
+
+.slider {
+  height: auto; /* permitir altura automática */
+}
+
+.slide img {
+  max-height: 180px; /* limitar la altura de las imágenes */
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.slide {
+  padding-bottom: 1rem; /* separar slide del caption */
+  height: auto;
+}
+
+.caption {
+  font-size: 0.9rem;
+  margin-top: 0.6rem;
+  padding: 0 0.4rem;
+  white-space: normal; /* permitir que el texto del caption haga wrap */
+}
       h1 {
         font-size: 1.7rem;
       }
@@ -227,30 +258,6 @@
         max-width: 90%;
         padding: 0.8rem 1rem;
       }
-  .slider-container {
-    width: 100vw; /* que ocupe todo el ancho móvil */
-    max-width: 100%; /* evitar overflow */
-    padding: 0.5rem 0.8rem 1.2rem; /* dejar espacio para caption */
-    box-sizing: border-box;
-  }
-
-  .slider img {
-    max-height: 180px; /* imagen más corta para que el caption se vea */
-    height: auto;
-  }
-
-  .caption {
-    font-size: 0.9rem;
-    margin-top: 0.6rem;
-    padding: 0 0.4rem;
-  }
-
-  .slide {
-    padding-bottom: 1rem; /* separar slides un poco más */
-  }
-}
-
-
       .slider-btn {
         font-size: 1.1rem;
         padding: 0.4rem 0.6rem;
