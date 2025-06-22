@@ -10,25 +10,25 @@
   button, a, input {
   -webkit-tap-highlight-color: rgba(255, 105, 180, 0.3); /* ejemplo color rosa transparente */
 }
-    body {
-      margin: 0;
-      font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(-45deg, #0d0d0d, #1a1a1a, #0d0d0d);
-      background-size: 400% 400%;
-      animation: fondoMovimiento 15s ease infinite;
-      padding: 0 1rem 3rem;
-      overflow-x: hidden;
-      min-height: 100vh;
-      position: relative;
-      z-index:0;
-        overflow-x: hidden;
-    }
+   body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(-45deg, #ff6fa3, #ff4081, #b83280, #360033);
+  background-size: 400% 400%;
+  animation: fondoMovimiento 20s ease infinite;
+  padding: 0 1rem 3rem;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+}
 
-    @keyframes fondoMovimiento {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+@keyframes fondoMovimiento {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 
     h1 {
       color: hotpink;
@@ -373,7 +373,27 @@
   transform: scale(1.05);
 }
 
-  
+.particle {
+  position: fixed;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  pointer-events: none;
+  animation-timing-function: linear;
+  z-index: 0;
+  filter: drop-shadow(0 0 3px #fff);
+}
+
+@keyframes starMove {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-20vh) scale(0.5);
+    opacity: 0;
+  }
+}  
   </style>
 </head>
 <body>
@@ -577,6 +597,24 @@ window.addEventListener('resize', () => {
   });
 
   crearCorazones(30);
+  
+  //estrellas
+  function crearEstrellas(cantidad = 40) {
+  for (let i = 0; i < cantidad; i++) {
+    const star = document.createElement('div');
+    star.className = 'particle';
+    const size = Math.random() * 2 + 1;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.left = Math.random() * 100 + 'vw';
+    star.style.top = Math.random() * 100 + 'vh';
+    star.style.animation = `starMove ${10 + Math.random() * 10}s linear infinite`;
+    star.style.animationDelay = (Math.random() * 10) + 's';
+    document.body.appendChild(star);
+  }
+}
+crearEstrellas(40);
+
 </script>
 
 </body>
