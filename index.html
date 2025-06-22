@@ -149,13 +149,16 @@
 .slider-container {
   position: relative;
   width: 300px;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
+  /* Vamos a quitar aspect-ratio para controlar mejor la altura */
+  /* aspect-ratio: 1 / 1; */
+  overflow: visible; /* para que caption no se corte */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
   flex-shrink: 0;
   border: 2px solid #ff69b4;
   padding: 0;
+  margin-bottom: 1rem; /* espacio abajo */
+  background: #1a1a1a; /* opcional para contraste */
 }
 
 .slide {
@@ -164,26 +167,25 @@
   align-items: center;
   width: 100%;
   flex-shrink: 0;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.8rem; /* espacio entre imagen y caption */
 }
 
 .slide img {
   width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
+  height: 300px; /* fijo para asegurar cuadrado */
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0; /* solo arriba */
   display: block;
 }
 
 .caption {
   color: #ffb6c1;
-  font-size: 1rem;
-  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  margin-top: 0.3rem;
   text-align: center;
   font-weight: 600;
   font-family: 'Quicksand', sans-serif;
-  flex-shrink: 0;
+  user-select: none;
 }
 
 
@@ -220,20 +222,21 @@
   
 @media (max-width: 600px) {
   .slider-container {
-    width: 100vw;
-    max-width: 100%;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-    border-radius: 10px;
-    border: 2px solid #ff69b4;
-    box-sizing: border-box;
+    width: 90vw;
+    max-width: 300px;
+    overflow: visible;
   }
+  .slide img {
+    height: auto; /* auto para que se adapte y mantenga aspect-ratio */
+    aspect-ratio: 1 / 1;
+  }
+
   .slide {
     width: 100%;
     padding: 0;
   }
   .caption {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }
 
