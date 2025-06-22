@@ -158,13 +158,13 @@
        padding: 0;  /* quitar padding si existía */
     }
     
-    .slider img {
-      width: 100%;
-      height: auto%;
-     object-fit: cover; /* rellena el contenedor sin deformar, cortando si es necesario */
-      border-radius: 10px;
-      display:block;
-    }
+.slide img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+  display: block;
+}
 
     .slider-btn {
       background: hotpink;
@@ -196,7 +196,6 @@
   width: 100%;
   flex-shrink: 0;
   transition: transform 0.5s ease;
-  /* height: 100%;  */ /* elimina esta línea */
   padding-bottom: 0.5rem; /* espacio para caption */
 }
 
@@ -208,17 +207,21 @@
 }
 
 
-    .caption {
-      color: #ffb6c1;
-      font-size: 1rem;
-      margin-top: 0.5rem;
-      text-align: center;
-      font-weight: 600;
-      font-family: 'Quicksand', sans-serif;
-    }
-
+.caption {
+  color: #ffb6c1;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  font-family: 'Quicksand', sans-serif;
+  background: #1a1a1a;
+  border-radius: 0 0 10px 10px;
+  padding: 0.3rem 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+  
 @media (max-width: 600px) {
-  /* Slider cuadrado y responsive */
   .slider-container {
     width: 100vw;
     max-width: 100%;
@@ -228,33 +231,15 @@
     border: 2px solid #ff69b4;
     box-sizing: border-box;
   }
-  .slider, .slide {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
   .slide {
-    display: flex;
-    flex-direction: column;
-  }
-  .slide img {
-    flex: 1;
     width: 100%;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-    display: block;
+    padding: 0;
   }
   .caption {
-    flex: 0 0 auto;
-    padding: 0.3rem 0;
     font-size: 0.9rem;
-    text-align: center;
-    color: #ffb6c1;
-    font-weight: 600;
-    background: #1a1a1a;
-    border-radius: 0 0 10px 10px;
   }
+}
+
 
   /* Botón carta centrado y con estilo fijo */
   #verCartaBtn {
@@ -495,9 +480,10 @@ kissBtn.addEventListener('click', () => {
     currentIndex = (currentIndex - 1 + totalImages) % totalImages;
     moverSlider();
   });
+  
+window.addEventListener('load', ajustarAnchos);
+window.addEventListener('resize', ajustarAnchos);
 
-  window.addEventListener('load', ajustarAnchos);
-  window.addEventListener('resize', ajustarAnchos);
 
   // Corazones animados
   function crearCorazones(cantidad = 25) {
