@@ -131,14 +131,14 @@
 }
 
     /* Slider */
-    .slider-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 3rem auto 2rem;
-      gap: 1rem;
-    }
-
+.slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem auto 2rem;
+  gap: 1rem;
+}
     .slider-container {
       position: relative;
       width: 300px;
@@ -191,6 +191,13 @@
       transition: transform 0.5s ease;
       height: 100%;
     }
+    .slider-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
 
     .caption {
       color: #ffb6c1;
@@ -317,9 +324,8 @@
 <h1><span class="resaltado">Mi</span> Persona Especial</h1>
 
 <div class="slider-wrapper">
-  <button class="slider-btn prev">←</button>
-  
   <div class="slider-container">
+    <div class="slider">
     <div class="slider">
       <div class="slide">
         <img src="img/foto1.jpeg" alt="Foto 1" />
@@ -379,8 +385,11 @@
       </div>
     </div>
   </div>
-  
-  <button class="slider-btn next">→</button>
+
+  <div class="slider-controls">
+    <button class="slider-btn prev">←</button>
+    <button class="slider-btn next">→</button>
+  </div>
 </div>
 
 
