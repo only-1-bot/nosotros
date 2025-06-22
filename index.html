@@ -230,9 +230,10 @@
       .slider-container {
         width: 90vw;
         background-color: #fff0f5;
-        heigth: auto;
-        padding-bottom: 1rem;
-        aspect-ratio: auto; 
+   height: auto;        /* o mejor: no poner height */
+    padding: 0;          /* quitar padding */
+    aspect-ratio: 1 / 1; /* mantener proporción cuadrada */
+    background-color: transparent; /* o el color que prefieras */
       }
 
       .slider-btn {
@@ -465,7 +466,7 @@ kissBtn.addEventListener('click', () => {
       heart.style.fontSize = (0.6 + Math.random() * 0.8) + 'rem';
       heart.style.top = '-' + (Math.random() * 20 + 5) + 'vh';
       heart.style.animationDelay = (Math.random() * 10) + 's';
-      heart.style.zIndex = 10;  // subir para que se vea
+      heart.style.zIndex = 0;  // subir para que se vea
       document.body.appendChild(heart);
     }
   }
