@@ -466,25 +466,28 @@ kissBtn.addEventListener('click', () => {
   const totalImages = slides.length;
   let currentIndex = 0;
 
-  function ajustarAnchos() {
-    const slideWidth = sliderContainer.offsetWidth;
-    slider.style.width = `${slideWidth * totalImages}px`;
-    slides.forEach(slide => {
-      slide.style.width = `${slideWidth}px`;
-    });
-    moverSlider();
-  }
+function ajustarAnchos() {
+  const slideWidth = sliderContainer.offsetWidth;
+  slider.style.width = `${slideWidth * totalSlides}px`;
+  allSlides.forEach(slide => {
+    slide.style.width = `${slideWidth}px`;
+  });
+  moverSlider();
+}
 
-  function moverSlider() {
-    const slideWidth = sliderContainer.offsetWidth;
-    slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-  }
+
+function moverSlider() {
+  const slideWidth = sliderContainer.offsetWidth;
+  slider.style.transition = 'transform 0.5s ease';
+  slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+}
+
 
   const prevBtn = document.querySelector('.slider-btn.prev');
   const nextBtn = document.querySelector('.slider-btn.next');
 
 nextBtn.addEventListener('click', () => {
-  if (currentIndex < totalImages - 1) {
+  if (currentIndex < totalSlides - 1) {
     currentIndex++;
     moverSlider();
   }
@@ -497,12 +500,44 @@ prevBtn.addEventListener('click', () => {
   }
 });
 
+
   
 window.addEventListener('load', () => {
   setTimeout(ajustarAnchos, 100);
 });
 window.addEventListener('resize', () => {
   setTimeout(ajustarAnchos, 100);
+});
+
+  // Clona el primer y último slide
+const firstSlideClone = slides[0].cloneNode(true);
+const lastSlideClone = slides[slides.length - 1].cloneNode(true);
+
+// Agrégalos al inicio y final del slider
+slider.appendChild(firstSlideClone);
+slider.insertBefore(lastSlideClone, slides[0]);
+
+// Actualiza el número total de slides
+const allSlides = slider.querySelectorAll('.slide');
+let totalSlides = allSlides.length;
+
+// Empieza desde el primer "real" slide
+let currentIndex = 1;
+
+  slider.addEventListener('transitionend', () => {
+  const slideWidth = sliderContainer.offsetWidth;
+
+  if (allSlides[currentIndex].isSameNode(firstSlideClone)) {
+    slider.style.transition = 'none';
+    currentIndex = 1;
+    slider.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+  }
+
+  if (allSlides[currentIndex].isSameNode(lastSlideClone)) {
+    slider.style.transition = 'none';
+    currentIndex = totalSlides - 2;
+    slider.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+  }
 });
 
 
