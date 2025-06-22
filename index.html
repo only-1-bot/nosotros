@@ -227,15 +227,29 @@
         max-width: 90%;
         padding: 0.8rem 1rem;
       }
+  .slider-container {
+    width: 100vw; /* que ocupe todo el ancho móvil */
+    max-width: 100%; /* evitar overflow */
+    padding: 0.5rem 0.8rem 1.2rem; /* dejar espacio para caption */
+    box-sizing: border-box;
+  }
 
-      .slider-container {
-        width: 90vw;
-        background-color: #fff0f5;
-   height: auto;        /* o mejor: no poner height */
-    padding: 0;          /* quitar padding */
-    aspect-ratio: 1 / 1; /* mantener proporción cuadrada */
-    background-color: transparent; /* o el color que prefieras */
-      }
+  .slider img {
+    max-height: 180px; /* imagen más corta para que el caption se vea */
+    height: auto;
+  }
+
+  .caption {
+    font-size: 0.9rem;
+    margin-top: 0.6rem;
+    padding: 0 0.4rem;
+  }
+
+  .slide {
+    padding-bottom: 1rem; /* separar slides un poco más */
+  }
+}
+
 
       .slider-btn {
         font-size: 1.1rem;
