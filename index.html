@@ -148,33 +148,30 @@ background: linear-gradient(-45deg, #080808, #222222, #080808);
 
 
     /* GIF beso */
- #kissVideoContainer.visible {
+#kissVideoContainer {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.8);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.6s ease;
+  transition: all 0.5s ease;
   z-index: 1000;
 }
-#kissVideo {
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.7);
-  max-width: 400px;
+
+#kissVideoContainer.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
-#kissVideoContainer::before {
-  content: '';
-  position: absolute;
-  top: -10px; left: -10px; right: -10px; bottom: -10px;
-  background: rgba(255, 105, 180, 0.3);
-  filter: blur(15px);
+#kissVideoContainer video {
   border-radius: 12px;
-  z-index: -1;
-  pointer-events: none;
-  transition: opacity 0.6s ease;
-  opacity: 0;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.7);
+  transition: box-shadow 0.4s ease;
+}
+
+#kissVideoContainer.active video {
+  box-shadow: 0 6px 30px rgba(255, 105, 180, 0.85);
 }
 
 #kissVideoContainer.active-glow::before {
@@ -452,26 +449,13 @@ background: linear-gradient(-45deg, #080808, #222222, #080808);
   background-color: rgba(255, 105, 180, 0.4); /* rosa semi-transparente */
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.3s ease;
   z-index: 999; /* Debajo del video que tiene 1000 */
-    backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
 }
-@keyframes softPulse {
-  0%, 100% {
-    background-color: rgba(255, 105, 180, 0.4);
-  }
-  50% {
-    background-color: rgba(255, 105, 180, 0.55);
-  }
-}
-
 #overlay.active {
   opacity: 1;
   pointer-events: auto;
-  animation: softPulse 3s ease-in-out infinite;
 }
-
 
   </style>
 </head>
@@ -543,7 +527,7 @@ background: linear-gradient(-45deg, #080808, #222222, #080808);
 </div>
 
 <script>
- // Botón "kiss"
+  // Botón "kiss"
 const kissBtn = document.getElementById('kissBtn');
 const kissVideoContainer = document.getElementById('kissVideoContainer');
 const kissVideo = document.getElementById('kissVideo');
@@ -551,12 +535,15 @@ const kissVideo = document.getElementById('kissVideo');
 kissBtn.addEventListener('click', () => {
   kissVideo.currentTime = 0;
   kissVideo.play();
-  kissVideoContainer.style.opacity = '1';
-  kissVideoContainer.style.pointerEvents = 'auto';
+
+  overlay.classList.add('active');
+  kissVideoContainer.classList.add('active');
+  kissVideoContainer.classList.add('active-glow');
 
   kissVideo.onended = () => {
-    kissVideoContainer.style.opacity = '0';
-    kissVideoContainer.style.pointerEvents = 'none';
+    overlay.classList.remove('active');
+    kissVideoContainer.classList.remove('active');
+    kissVideoContainer.classList.remove('active-glow');
   };
 });
 
@@ -603,6 +590,7 @@ kissBtn.addEventListener('click', () => {
     kissVideoContainer.style.pointerEvents = 'none';
   };
 });
+
   
   // Slider funcionalidad
 const slider = document.querySelector('.slider');
@@ -752,4 +740,3 @@ crearEstrellas(40);
 
 
  
-
