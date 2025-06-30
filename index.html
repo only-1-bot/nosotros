@@ -543,26 +543,64 @@ background: linear-gradient(-45deg, #080808, #222222, #080808);
 </div>
 
 <script>
- const kissBtn = document.getElementById('kissBtn');
+ // Botón "kiss"
+const kissBtn = document.getElementById('kissBtn');
 const kissVideoContainer = document.getElementById('kissVideoContainer');
 const kissVideo = document.getElementById('kissVideo');
-const overlay = document.getElementById('overlay');
 
 kissBtn.addEventListener('click', () => {
-  // Reinicia el video
+  kissVideo.currentTime = 0;
+  kissVideo.play();
+  kissVideoContainer.style.opacity = '1';
+  kissVideoContainer.style.pointerEvents = 'auto';
+
+  kissVideo.onended = () => {
+    kissVideoContainer.style.opacity = '0';
+    kissVideoContainer.style.pointerEvents = 'none';
+  };
+});
+
+  //glow vidio
+  kissBtn.addEventListener('click', () => {
   kissVideo.currentTime = 0;
   kissVideo.play();
 
-  // Mostrar overlay y video con estilo
+  // Mostrar overlay y video
   overlay.classList.add('active');
-  kissVideoContainer.classList.add('active-glow');
-  kissVideoContainer.classList.add('visible');
+  kissVideoContainer.style.opacity = '1';
+  kissVideoContainer.style.pointerEvents = 'auto';
 
-  // Al finalizar el video, oculta todo con animación
+  // Agregar la clase para el glow
+  kissVideoContainer.classList.add('active-glow');
+
   kissVideo.onended = () => {
+    // Ocultar overlay y video
     overlay.classList.remove('active');
+    kissVideoContainer.style.opacity = '0';
+    kissVideoContainer.style.pointerEvents = 'none';
+
+    // Quitar la clase glow
     kissVideoContainer.classList.remove('active-glow');
-    kissVideoContainer.classList.remove('visible');
+  };
+});
+
+  //overlay rosado
+  const overlay = document.getElementById('overlay');
+
+kissBtn.addEventListener('click', () => {
+  kissVideo.currentTime = 0;
+  kissVideo.play();
+  
+  // Mostrar overlay y video
+  overlay.classList.add('active');
+  kissVideoContainer.style.opacity = '1';
+  kissVideoContainer.style.pointerEvents = 'auto';
+
+  kissVideo.onended = () => {
+    // Ocultar overlay y video
+    overlay.classList.remove('active');
+    kissVideoContainer.style.opacity = '0';
+    kissVideoContainer.style.pointerEvents = 'none';
   };
 });
   
